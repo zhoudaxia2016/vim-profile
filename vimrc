@@ -13,5 +13,3 @@ nnoremap <F2> :!google-chrome %<cr>
 
 colorscheme NeoSolarized
 set background=dark
-
-autocmd BufNewFile  *.html	0r ~/.vim/templates/html.tpl
