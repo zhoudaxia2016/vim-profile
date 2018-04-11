@@ -1,10 +1,8 @@
 set nu
 set wrap
 set nocompatible
-filetype on
+filetype indent on
 syntax on
-set autoindent
-set smartindent
 set softtabstop=2
 set shiftwidth=2
 let mapleader=","
@@ -15,3 +13,5 @@ nnoremap <F2> :!google-chrome %<cr>
 
 colorscheme NeoSolarized
 set background=dark
+
+autocmd BufNewFile  *.html	0r ~/.vim/templates/html.tpl
