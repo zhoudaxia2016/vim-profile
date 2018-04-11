@@ -6,9 +6,7 @@ function! input#radio (question, options)
     let list = list . "&" . (index + 1) . a:options[index] . "\n"
     let index = index + 1
   endwhile
-  echohl NonText
   let sel = confirm(a:question, list)
-  echohl None
   return sel
 endfunc
 

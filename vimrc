@@ -5,6 +5,7 @@ filetype indent on
 syntax on
 set softtabstop=2
 set shiftwidth=2
+set noswapfile
 let mapleader=","
 set backspace=indent,eol,start
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
