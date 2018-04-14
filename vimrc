@@ -1,7 +1,12 @@
 set nu
+set relativenumber
+set swb=useopen
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
 set wrap
 set nocompatible
 filetype indent on
+filetype plugin on
 syntax on
 set softtabstop=2
 set shiftwidth=2
