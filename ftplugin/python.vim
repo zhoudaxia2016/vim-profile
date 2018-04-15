@@ -1,1 +1,1 @@
-let &l:makeprg = 'python3 %'
+compiler python
