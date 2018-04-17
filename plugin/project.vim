@@ -2,7 +2,7 @@ nnoremap <F3> :call <SID>LoadProjectTemplate()<cr>
 
 let s:project_root = $HOME . '/.vim/templates/projects/'
 let s:var_json = 'var.json'
-let s:projectList = ['webpack', 'rollup', 'react-webpack']
+let s:projectList = ['simple-webpack', 'rollup', 'react-webpack']
 
 function! <SID>LoadProjectTemplate ()
   let pn = input#radio("What's the project template's name?", s:projectList)	

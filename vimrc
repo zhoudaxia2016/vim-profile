@@ -13,9 +13,6 @@ set shiftwidth=2
 set noswapfile
 let mapleader=","
 set backspace=indent,eol,start
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
-nnoremap <F2> :!google-chrome %<cr>
 
 colors onedark
 
