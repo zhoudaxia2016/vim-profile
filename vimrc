@@ -24,6 +24,3 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
-
-let netrw_banner = 0
-let g:netrw_browse_split = 1
