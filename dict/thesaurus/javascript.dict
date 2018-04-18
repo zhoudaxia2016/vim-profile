@@ -1,0 +1,3 @@
+getElementById getElementsByName getElementsByClass
+concat join pop push reverse shift sort splice unshift
+toString toLocaleString valueOf toSource

@@ -4,6 +4,7 @@ let b:compilers = ['node', 'npm']
 
 " dict
 setlocal dictionary+=~/.vim/dict/javascript.dict
+setlocal thesaurus+=~/.vim/dict/thesaurus/javascript.dict
 
 " include file search
 let &l:include = 'import\s*\i*\s*from\|import\|require('

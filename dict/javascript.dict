@@ -2,7 +2,7 @@ var let const
 while return else function for
 this new prototype
 import export require module
-class super constructora extends
+class super constructor extends
 instanceof typeof delete
 switch case break default continue
 iterator async await promise

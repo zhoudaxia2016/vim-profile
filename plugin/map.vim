@@ -29,6 +29,15 @@ inoremap <c-d> <c-x><c-d>
 inoremap <c-o> <c-x><c-o>
 inoremap <c-i> <c-x><c-i>
 
+function! CleverTab()
+  if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+    return "\<Tab>"
+  else
+    return "\<C-N>"
+  endif
+endfunction
+inoremap <Tab> <C-R>=CleverTab()<CR>
+
 " open a help file
 " need to prohibit the terminal <F1> binding
 nnoremap <expr> <F1>  <SID>openHelpFile()
