@@ -48,3 +48,12 @@ function <SID>openHelpFile ()
   echohl None
   return ':h ' . filename . "\<cr>"
 endfunction
+
+" move around window
+nnoremap <tab>l <c-w><c-l>
+nnoremap <tab>h <c-w><c-h>
+nnoremap <tab>j <c-w><c-j>
+nnoremap <tab>k <c-w><c-k>
+nnoremap <tab>t <c-w><c-t>
+nnoremap <tab>b <c-w><c-b>
+nnoremap <tab>P <c-w><c-P>

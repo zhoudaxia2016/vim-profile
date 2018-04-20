@@ -21,3 +21,6 @@ endfunction
 
 " define search
 let &l:define = '^\s*\(var\|let\|const\|class\|import\|function\)'
+
+" path
+set path=./node_modules;./
