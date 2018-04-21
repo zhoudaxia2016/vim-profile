@@ -1,4 +1,4 @@
-let b:jump_mark = '{! + !}'
-let b:jump_mark_d = '{'
-exec 'inoremap <silent> <c-j>  <esc>nca' . b:jump_mark_d
+let g:jump_mark = '{! + !}'
+let g:jump_mark_d = '{'
+exec 'inoremap <silent> <c-j>  <esc>nca' . g:jump_mark_d
 

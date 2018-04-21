@@ -1,3 +1,7 @@
+if exists('b:did_snippet')
+  finish
+endif
+let b:did_snippet = 1
 let s:abbrSet = {}
 
 function! MakeSnippet(abbr, code)

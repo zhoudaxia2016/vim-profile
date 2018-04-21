@@ -57,3 +57,5 @@ nnoremap <tab>k <c-w><c-k>
 nnoremap <tab>t <c-w><c-t>
 nnoremap <tab>b <c-w><c-b>
 nnoremap <tab>P <c-w><c-P>
+
+onoremap - t_
