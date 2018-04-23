@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   entry: './src/index.js',
@@ -10,8 +11,19 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: 'babel-loader'
+        use: ['babel-loader', 'eslint-loader'],
+	enforce: 'pre',
+	exclude: /node_modules/
       }
     ]
+  },
+  devtool: 'eval-source-map',
+  plugins: [
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+  ],
+  devServer: {
+    contentBase: './dist',
+    hotOnly: true
   }
 }

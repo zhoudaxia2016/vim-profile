@@ -68,7 +68,7 @@ call MakeSnippet('ad', 'let [$] = [$]')
 call MakeSnippet('od', 'let {$} = {$}')
 
 " arrow function
-call MakeSnippet('arf', '$ => ')
+call MakeSnippet('arf', '($) => ')
 
 " class declaration
 call MakeSnippet('cl', 'class $ {<cr>constructor ($) {<cr>$<cr>}$<cr>}')
@@ -81,3 +81,9 @@ call MakeSnippet('ne', 'let $ = new $($)')
 
 " promise
 call MakeSnippet('pr', 'let $ = new promise($)')
+
+" require
+call MakeSnippet('re', "let $ = require('$')")
+
+" console.log
+call MakeSnippet('co', 'console.log($)')

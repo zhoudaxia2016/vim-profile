@@ -2,7 +2,7 @@ nnoremap <F3> :call <SID>LoadProjectTemplate()<cr>
 
 let s:project_root = $HOME . '/.vim/templates/projects/'
 let s:var_json = 'var.json'
-let s:projectList = ['simple-webpack', 'rollup', 'react-webpack']
+let s:projectList = ['react-html', 'rollup', 'react-webpack']
 
 function! <SID>LoadProjectTemplate ()
   let pn = input#radio("What's the project template's name?", s:projectList)	
@@ -16,10 +16,6 @@ function! <SID>LoadProjectTemplate ()
 
   let var_json = project_path . s:var_json
   let json = json#readfile(var_json)
-  if type(json) == 0
-    call Err("\nThe template doesn't have a var json file!")
-    return
-  endif
 
   exec "!cp -r " . project_path  . "template/. ."
 
@@ -28,35 +24,37 @@ function! <SID>LoadProjectTemplate ()
   " The key in the boolean controls the content show or hide between the key
   let boolean = {}
 
-  for [key, value] in items(json)
-    " Input Question
-    if value.type == 0
-      let val = input#input("What's the project's " . key)
-      if val != ''
-        let replace[key] = val
-      else 
-        try
-          let replace[key] = value.default
-        catch '.*'
-          return
-        endtry
-      endif
-        
-    " Single choice Question
-    elseif value.type == 1
-      let val = input#radio("which " . key . '?', value.list)
-      if val == 0
-        return
-      endif
-      let sel = value.list[val-1]
-      let replace[key] = sel
+  if type(json) != 0
+    for [key, value] in items(json)
+      " Input Question
+      if value.type == 0
+	let val = input#input("What's the project's " . key)
+	if val != ''
+	  let replace[key] = val
+	else 
+	  try
+	    let replace[key] = value.default
+	  catch '.*'
+	    return
+	  endtry
+	endif
+	  
+      " Single choice Question
+      elseif value.type == 1
+	let val = input#radio("which " . key . '?', value.list)
+	if val == 0
+	  return
+	endif
+	let sel = value.list[val-1]
+	let replace[key] = sel
 
-    " y/N Question
-    elseif value.type == 2
-      let val = input#confirm("Use " . key . "?")
-      let boolean[key] = val
-    endif
-  endfor
+      " y/N Question
+      elseif value.type == 2
+	let val = input#confirm("Use " . key . "?")
+	let boolean[key] = val
+      endif
+    endfor
+  endif
 
   args **/*.*
   for [key, value] in items(replace)

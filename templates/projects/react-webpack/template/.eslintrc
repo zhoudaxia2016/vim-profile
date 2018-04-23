@@ -1,0 +1,19 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },  
+  "extends": ["plugin:react/recommended"],
+  "env": {
+    "node": true,
+    "browser": true
+  },  
+  "rules": {
+    "semi": ["error", "never"],
+    "no-undef": 2,
+    "no-unused-vars": 2,
+    "comma-spacing": 1,
+    "react/prop-types": 0
+  }
+}
+

@@ -4,6 +4,7 @@ let g:netrw_browse_split = 0
 let g:netrw_list_hide= '^\.'
 let g:netrw_winsize=16
 let g:netrw_bufsettings="nonu rnu wrap"
+let g:netrw_use_noswf= 0
 
 function! ToggleExplorer()
   if exists("t:expl_buf_num")
