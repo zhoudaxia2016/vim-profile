@@ -59,5 +59,7 @@ function! GetVueIndent()
     execute 'let indent = ' . s:html_indent
   endif
 
+  echom indent
+  echom "message"
   return indent
 endfunction

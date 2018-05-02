@@ -2,8 +2,11 @@ set nu
 set relativenumber
 set scrolloff=3
 set swb=useopen
-autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber
+augroup setnumber
+  au!
+  autocmd InsertEnter * :set norelativenumber
+  autocmd InsertLeave * :set relativenumber
+augroup END
 set wrap
 set nocompatible
 filetype indent on

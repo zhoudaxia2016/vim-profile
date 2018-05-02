@@ -59,3 +59,7 @@ nnoremap <tab>b <c-w><c-b>
 nnoremap <tab>P <c-w><c-P>
 
 onoremap - t_
+
+nnoremap <F9> :message<cr>
+nnoremap <F8> :set list!<cr>
+nnoremap <leader>z :!google-chrome %<cr>

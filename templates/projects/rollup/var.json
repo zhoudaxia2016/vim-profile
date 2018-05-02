@@ -1,14 +1,17 @@
 {
-  "name": {
-    "type": 0
+  "prompts": {
+    "name": {
+      "type": 0
+    },
+    "lint": {
+      "type": 1,
+      "list": ["eslint", "jslint"],
+      "defualt": 0
+    },
+    "usebabel": {
+      "type": 2,
+      "default": 1
+    }
   },
-  "lint": {
-    "type": 1,
-    "list": ["eslint", "jslint"],
-    "defualt": 0
-  },
-  "usebabel": {
-    "type": 2,
-    "default": 1
-  }
+  "message": "Complete!"
 }

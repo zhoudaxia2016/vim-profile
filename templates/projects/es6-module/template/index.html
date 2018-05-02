@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>{{name}}</title>
+    {{#frame:react}}<!-- Product Mode
+    <script src="https://cdn.bootcss.com/react/16.4.0-alpha.0911da3/umd/react.production.min.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.4.0-alpha.0911da3/umd/react-dom.production.min.js"></script>
+    -->
+    <script src="https://cdn.bootcss.com/react/16.4.0-alpha.0911da3/umd/react.development.js"></script>
+    <script src="https://cdn.bootcss.com/react-dom/16.4.0-alpha.0911da3/umd/react-dom.development.js"></script>{{/frame:react}}{{#frame:vue}}<!-- Product Mode
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+    -->
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>{{/frame:vue}}
+  </head>
+  <body>
+    <div class="app">{{#frame:vue}}
+      <App/>
+    {{/frame:vue}}</div>
+    <script type="module" src="/static/index.js"></script>
+  </body>
+</html>
+

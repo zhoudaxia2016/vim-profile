@@ -1,0 +1,13 @@
+{
+  "prompts": {
+    "frame": {
+      "type": 1,
+      "list": ["none", "vue", "react"],
+      "default": 0,
+    },
+    "name": {
+      "type": 0
+    }
+  },
+  "message": "Welcome to use {frame}!"
+}

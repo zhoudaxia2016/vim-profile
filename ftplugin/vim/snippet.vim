@@ -10,10 +10,10 @@ function! MakeSnippet(abbr, code)
 endfunc
 
 " if
-call MakeSnippet('if', 'if ($)<cr>$<cr>endif')
+call MakeSnippet('if', 'if $<cr>$<cr>endif')
 
 " if else
-call MakeSnippet('ife', 'if ($)<cr>$<cr>else<cr>$<cr>endif')
+call MakeSnippet('ife', 'if $<cr>$<cr>else<cr>$<cr>endif')
 
 " function
 call MakeSnippet('fu', 'function $ ($)<cr>$<cr>endfunc')

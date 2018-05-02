@@ -10,6 +10,5 @@ endfunc
 
 function snippet#snippet#jumpToFirstPos ()
   let str = "\<esc>gg/" . g:jump_mark . "\<cr>ca" . g:jump_mark_d . "\<c-r>=utils#Eatchar(' ')\<cr>"
-  echom str
   return str
 endfunc
