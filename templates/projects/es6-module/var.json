@@ -9,5 +9,13 @@
       "type": 0
     }
   },
+  "filters": {
+    "include": {
+      "dist": "frame:react"
+    },
+    "exclude": {
+      "src/app.js": "frame:none"
+    }
+  },
   "message": "Welcome to use {frame}!"
 }

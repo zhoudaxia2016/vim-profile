@@ -1,11 +1,11 @@
-{{#frame:react}}function App (name) {
+{{#frame:react}}function App (props) {
   return (
-    <div>Hello {name}</div>
+    <div>Hello {props.name}</div>
   )
 }{{/frame:react}}{{#frame:vue}}let App = {
   template: '<div>Hello {%{name}%}</div>',
-  data: {
-    name: 'Mao'
+  data () {
+    return { name: 'Mao' }
   }
 }{{/frame:vue}}
 
