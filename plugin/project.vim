@@ -48,11 +48,18 @@ function! <SID>LoadProjectTemplate ()
 
 	  " Single choice Question
 	elseif value.type == 1
-	  let val = input#radio("which " . key . '?', value.list)
+	  if type(value.list) == 4
+	    let hints = values(value.list)
+	    let labels = keys(value.list)
+	  else
+	    let hints = value.list
+	    let labels = hints
+	  endif
+	  let val = input#radio("which " . key . '?', hints)
 	  if val == 0
 	    return
 	  endif
-	  let sel = value.list[val-1]
+	  let sel = labels[val-1]
 	  let option[key] = sel
 
 	  " y/N Question
@@ -64,8 +71,18 @@ function! <SID>LoadProjectTemplate ()
     endif
 
     if has_key(json, 'filters')
+
       let filters = json['filters']
+
+      if has_key(filters, 'include')
+	let filters_include = filters['include']
+      endif
+
+      if has_key(filters, 'exclude')
+	let filters_exclude = filters['exclude']
+      endif
     endif
+
     if has_key(json, 'message')
       let message = json['message']
     endif
@@ -74,29 +91,41 @@ function! <SID>LoadProjectTemplate ()
   args **/*.*
   for [key, value] in items(replace)
     let pattern = '{{\s*' . key . '\s*}}'
-    exec 'argdo %s/' . pattern . '/' . value . '/ge | update'
+    exec 'silent argdo %s/' . pattern . '/' . value . '/ge | update'
   endfor
 
   for [key, value] in items(boolean)
     let rep = value ? '\1' : ''
     let pattern = '{{#\s*' . key . '\s*}}\(\_.*\){{\/\s*' . key . '\s*}}'
-    exec 'argdo %s/' . pattern . '/' . rep . '/ge | update'
+    exec 'silent argdo %s/' . pattern . '/' . rep . '/ge | update'
+    let rep = value ? '' : '\1'
+    let pattern = '{{!\s*' . key . '\s*}}\(\_.*\){{\/\s*' . key . '\s*}}'
+    exec 'silent argdo %s/' . pattern . '/' . rep . '/ge | update'
   endfor
 
   for [key, value] in items(option)
-    for opt in prompts[key].list
-      let rep = (value == opt) ? '\1' : ''
+    if type(prompts[key].list) == 4
+      let labels = keys(prompts[key].list)
+    else
+      let labels = prompts[key].list
+    endif
+    for opt in labels
       let label = key . ':' . opt
+      let rep = (value == opt) ? '\1' : ''
       let pattern = '{{#\s*' . label . '\s*}}\(\_.\{-}\){{\/\s*' . label . '\s*}}'
-      exec 'argdo %s/' . pattern . '/' . rep . '/ge | update'
+      exec 'silent argdo %s/' . pattern . '/' . rep . '/ge | update'
+      let rep = (value == opt) ? '' : '\1'
+      let pattern = '{{!\s*' . label . '\s*}}\(\_.\{-}\){{\/\s*' . label . '\s*}}'
+      exec 'silent argdo %s/' . pattern . '/' . rep . '/ge | update'
     endfor
   endfor
 
   " Prevent to replace the {{}} for vue, use {%{}%}
   argdo %s/{%{\(\_.\{-}\)}%}/{{\1}}/ge | update
 
-  if exists('filters')
-    for [key, value] in items(filters)
+  " Whether the file exists
+  if exists('filters_include')
+    for [key, value] in items(filters_include)
       let splits = split(value, ':')
       if len(splits) != 1
 	let filter = get(option, splits[0]) == splits[1]
@@ -104,14 +133,28 @@ function! <SID>LoadProjectTemplate ()
 	let filter = get(boolean, splits[0])
       endif	
       if !filter
-	exec '!rm ' . key
-	call feedkeys("\<CR>")
+	exec 'silent !rm -r ' . key
+      endif
+    endfor
+  endif
+
+  " Whether the file does not exist
+  if exists('filters_exclude')
+    for [key, value] in items(filters_exclude)
+      let splits = split(value, ':')
+      if len(splits) != 1
+	let filter = get(option, splits[0]) == splits[1]
+      else
+	let filter = get(boolean, splits[0])
+      endif	
+      if filter
+	exec 'silent !rm -r ' . key
       endif
     endfor
   endif
 
   if exists('message')
-    echom substitute(message, '{\([^}]*\)}', '\=<SID>GetValue(replace, option, submatch(1))', 'g') 
+    echo substitute(message, '{\([^}]*\)}', '\=<SID>GetValue(replace, option, submatch(1))', 'g') 
   endif
 
 endfunc
