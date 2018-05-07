@@ -9,13 +9,32 @@
     <script src="https://cdn.bootcss.com/react-dom/16.4.0-alpha.0911da3/umd/react-dom.development.js"></script>{{/frame:react}}{{#frame:vue}}<!-- Product Mode
     <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
     -->
-    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>{{/frame:vue}}
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>{{/frame:vue}}{{#refresh:socketio}}
+    <script src="https://cdn.bootcss.com/socket.io/2.1.0/socket.io.js"></script>{{/refresh:socketio}}
   </head>
   <body>
     <div class="app">{{#frame:vue}}
       <App/>
     {{/frame:vue}}</div>
-    <script type="module" src="/static/index.js"></script>
+    <script type="module" src="/static/index.js"></script>{{#refresh:poll}}
+    <script>
+setInterval(() => {
+  fetch('/need/to/update')
+    .then(res => res.text())
+    .then(change => {
+      if (change === 'true') window.location.reload()
+    })
+}, 1000)
+    </script>{{/refresh:poll}}{{#refresh:socketio}}
+    <script>
+let socket = io('http://localhost:3000')
+socket.on('message', data => {
+  if (data.change) {
+    socket.close()
+    window.location.reload()
+  }
+})
+    </script>{{/refresh:socketio}}
   </body>
 </html>
 
