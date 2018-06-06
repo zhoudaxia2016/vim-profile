@@ -2,7 +2,7 @@ nnoremap <F3> :call <SID>LoadProjectTemplate()<cr>
 
 let s:project_root = $HOME . '/.vim/templates/projects/'
 let s:var_json = 'var.json'
-let s:projectList = ['es6-module', 'rollup', 'react-webpack']
+let s:projectList = ['es6-module', 'rollup', 'webpack']
 
 function! <SID>LoadProjectTemplate ()
 
@@ -89,6 +89,7 @@ function! <SID>LoadProjectTemplate ()
   endif
 
   args **/*.*
+  arga .*
   for [key, value] in items(replace)
     let pattern = '{{\s*' . key . '\s*}}'
     exec 'silent argdo %s/' . pattern . '/' . value . '/ge | update'

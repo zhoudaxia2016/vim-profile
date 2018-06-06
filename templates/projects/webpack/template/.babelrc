@@ -1,0 +1,3 @@
+{
+  "presets": ["env"{{#frame:react}}, "react"{{/frame:react}}]
+}
