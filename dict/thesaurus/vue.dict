@@ -1,0 +1,5 @@
+data props computed methods watch template render
+directive component use mixin nextTick set delete extend compile version
+mounted created destoryed updated beforeUpdate beforeCreate beforeMount activated beforeActivated
+components diretives mixins filters
+$emit $refs $slots $watch $set $delete

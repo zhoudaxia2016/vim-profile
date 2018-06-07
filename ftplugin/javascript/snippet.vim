@@ -35,7 +35,7 @@ call MakeSnippet('fe', 'let $ = function ($) {<cr>$<cr>}')
 call MakeSnippet('af', 'function ($) {<cr>$<cr>}')
 
 " for
-call MakeSnippet('for', 'for (let i = 0$; i ++; i < $) {<cr>$<cr>}')
+call MakeSnippet('for', 'for (let i = 0$; i < $; i ++$) {<cr>$<cr>}')
 
 " for in
 call MakeSnippet('fi', 'for $ in $ {<cr>$<cr>}')
