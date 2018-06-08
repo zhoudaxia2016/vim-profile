@@ -8,6 +8,9 @@ function! <SID>LoadProjectTemplate ()
 
   " Get the template's directory
   let pn = input#radio("What's the project template's name?", s:projectList)	
+  if pn == 0
+    return
+  endif
   let pn = s:projectList[pn-1]
   call feedkeys("\<CR>")
   let project_path = s:project_root . pn . '/'
