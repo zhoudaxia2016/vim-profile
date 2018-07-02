@@ -8,6 +8,7 @@ function snippet#triggerSnippet ()
   let snippet = s:getSnippet(word, snippets)
   if len(snippet) == 0 | return '' | endif
   call s:deleteWordBelowCursor()
+  let curLineStr = getline('.')
   let stoppar = '${\(\d\+\):\([^}]\+\)}'
   let mirrorpar = '$\(\d\+\)'
   let b:stops = []
@@ -16,8 +17,10 @@ function snippet#triggerSnippet ()
   let lnum = 0
   let curLine = line('.')
   let stopNum = 0
-  let b:snip_state = {"num": -1, "selected": 1 }
-  inoremap <bs> <c-r>=<SID>deleteChar()<cr>
+  let b:snip_state = {"num": -1, "selected": 1}
+  let b:lastInsetedChar = ''
+  let indent = indent(curLine)
+  let indentStr = repeat(' ', indent)
 
   for line in snippet
     let curStops = []
@@ -27,7 +30,7 @@ function snippet#triggerSnippet ()
     let i = 0
     for item in curStops
       let item.lnum = lnum + curLine
-      let item.cols = cols[i] + beforeStopLen + 1
+      let item.cols = cols[i] + beforeStopLen + 1 + indent
       let i += 1
       call add(b:stops, item) 
       let beforeStopLen = beforeStopLen + len(item.val)
@@ -39,21 +42,47 @@ function snippet#triggerSnippet ()
   let lnum = 0
   for line in lines
     let curMirrors = []
-    call add(afterLines, substitute(line, mirrorpar, '\=s:parseMirror(submatch(1), curMirrors)', 'g'))
+    call substitute(line, mirrorpar, '\=s:parseMirror(submatch(1), submatch(0), curMirrors)', 'g')
     let cols = s:getCol(line, mirrorpar)
-    let beforeMirrorLen = 0
     let i = 0
     for item in curMirrors
+      let l = len(b:stops[item.stopNum])
       let item.lnum = lnum + curLine
-      let item.cols = cols[i] + beforeMirrorLen + 1
+      let item.cols = cols[i] + i*2 + 1 + indent
       let i += 1
       call add(b:mirrors, item)
-      let beforeMirrorLen = beforeMirrorLen + len(b:stops[item.stopNum])
     endfor
     let lnum = lnum + 1
   endfor
 
-  call append(line('.') - 1, afterLines)
+  let lnum = 0
+  for line in lines
+    let curMirrors = filter(copy(b:mirrors), 'v:val.lnum == lnum + curLine')
+    call add(afterLines, substitute(line, mirrorpar, '\=s:parseMirror(submatch(1))', 'g'))
+    let change = 0
+    for item in curMirrors
+      let l = len(b:stops[item.stopNum].val)
+      let item.cols += change
+      let curChange = l - 2
+      let change += curChange
+      let item.colsEnd = item.cols + l - 1
+      let stops = filter(copy(b:stops), 'v:val.lnum == lnum + curLine && v:val.cols > item.cols')
+      for stop in stops
+	let stop.cols += curChange
+      endfor
+    endfor
+    let lnum += 1
+  endfor
+
+  let afterLines[0] = curLineStr . afterLines[0]
+  let i = 1
+  let l = len(afterLines)
+  while i < l
+    let afterLines[i] = indentStr . afterLines[i]
+    let i += 1
+  endwhile
+  call append('.', afterLines)
+  exec "normal dd"
 
   aug snippet_change
     au CursormovedI <buffer> if exists('b:snip_state') |
@@ -61,6 +90,7 @@ function snippet#triggerSnippet ()
       \ else |
       \   au! snippet_change * <buffer> |
       \ endif
+    au InsertCharPre <buffer> call s:getLastInserted()
     au Cursormoved <buffer> call s:handleCursorMoved()
   aug END
 
@@ -70,17 +100,23 @@ function snippet#triggerSnippet ()
   return ''
 endfunc
 
-function <SID>deleteChar ()
-  let b:input_back_space = 1
-  return "\<bs>"
+function s:getLastInserted ()
+  let b:lastInsetedChar = v:char
 endfunc
 
-function s:parseMirror (stopNum, mirrors)
-  call add(a:mirrors, { 'stopNum': a:stopNum })
-  echom b:stops[a:stopNum].val
-  return b:stops[a:stopNum].val
+function s:parseMirror (...)
+  " Parse first time
+  " Add stopNum
+  " return $d
+  if a:0 == 3
+    call add(a:3, { 'stopNum': a:1 })
+    return a:2
+  " Parse second time
+  " return corresponding stop value
+  elseif a:0 == 1
+    return b:stops[a:1].val
+  endif
 endfunc
-
 
 function snippet#triggerSnippetAtSelectMode ()
   if exists('b:snip_state')
@@ -110,37 +146,86 @@ endfunc
 function s:remove ()
   unlet b:snip_state
   unlet b:stops
+  unlet b:mirrors
+  unlet b:lastInsetedChar
   au! snippet_change * <buffer>
 endfunc
 
+function s:updateMirror (lnum, cols, change)
+  let mirrors = filter(copy(b:mirrors), 'v:val.lnum == a:lnum && v:val.cols > a:cols')
+  for item in mirrors
+    let item.cols += a:change
+    let item.colsEnd += a:change
+  endfor
+endfunc
+
+function s:updateStop (lnum, cols, change)
+  let stops = filter(copy(b:stops), 'v:val.lnum == a:lnum && v:val.cols > a:cols')
+  for item in stops
+    let item.cols += a:change
+  endfor
+endfunc
+
+function s:replaceMirror (mirror, change)
+  let pos = getpos('.')
+  let lnum = a:mirror.lnum
+  let cols = a:mirror.cols
+  call cursor(lnum, cols)
+  let l = a:mirror.colsEnd - cols + 1
+  exec "normal " . (l == 0 ? 'r' : 'c' . l . 'l') . b:lastInsetedChar
+  let a:mirror.colsEnd = a:mirror.cols
+  call s:updateMirror(lnum, cols, a:change)
+  call s:updateStop(lnum, cols, a:change)
+  call setpos('.', pos)
+endfunc
+
+function s:modifyMirror (mirror, change)
+  let pos = getpos('.')
+  let lnum = a:mirror.lnum
+  let cols = a:mirror.cols
+  call cursor(lnum, a:mirror.colsEnd)
+  exec "normal " . (b:lastInsetedChar == '' ? 'x' : 'a' . b:lastInsetedChar)
+  let a:mirror.colsEnd += a:change
+  call s:updateMirror(lnum, cols, a:change)
+  call s:updateStop(lnum, cols, a:change)
+  call setpos('.', pos)
+endfunc
+
 function s:updateChange ()
+  echom '-----------'
   let num = b:snip_state.num
   let stopLen = len(b:stops)
   if num >= stopLen
-    call remove()
+    call s:remove()
     return
   endif
   let stop = b:stops[num]
   let lnum = stop.lnum
   if b:snip_state.selected == 1
     let change = 1 - len(stop.val)
-    let b:snip_state.selected = 0
   else
-    if exists('b:input_back_space')
+    if b:lastInsetedChar == ""
       let change = -1
-      unlet b:input_back_space
     else
       let change = 1
     endif
   endif
-  while num < stopLen
-    let nextStop = b:stops[num]
-    if lnum != nextStop.lnum
-      break
-    endif
-    let nextStop.cols = nextStop.cols + change
-    let num = num + 1
-  endwhile
+
+  call s:updateMirror(stop.lnum, stop.cols, change)
+  call s:updateStop(stop.lnum, stop.cols, change)
+
+  let mirrors = filter(copy(b:mirrors), 'v:val.stopNum == b:snip_state.num')
+  if b:snip_state.selected
+    for item in mirrors
+      call s:replaceMirror(item, change)
+    endfor
+  else
+    for item in mirrors
+      call s:modifyMirror(item, change)
+    endfor
+  endif
+  let b:snip_state.selected = 0
+  let b:lastInsetedChar = ''
 endfunc
 
 function s:getCol (line, stoppar)
@@ -171,7 +256,6 @@ function s:selectWord (word, selectMap)
     let l = col('.') == 1 ? '' : 'l'
     return len == 1 ? "\<esc>" . l . 'gh' : "\<esc>" . l . "v" . (len-1) . "l\<c-g>"
   else
-    echom len == 1 ? 'gh' : 'v' . (len-1) . "l\<c-g>"
     return len == 1 ? 'gh' : 'v' . (len-1) . "l\<c-g>"
   endif
 endfunc
