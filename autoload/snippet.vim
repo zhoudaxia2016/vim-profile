@@ -229,12 +229,54 @@ function s:updateMirror (mirror, change)
   call setpos('.', pos)
 endfunc
 
+" 处理输入换行的情况
+function s:handleNewLine ()
+  let num = b:snip_state.num
+  let lnum = b:stops[num].lnum
+  let cols = b:stops[num].cols
+  let indent = indent('.')
+
+  let stops1 = filter(copy(b:stops), 'v:val.lnum == lnum && v:val.cols > cols')
+  let stops2 = filter(copy(b:stops), 'v:val.lnum > lnum')
+  let mirrors1 = filter(copy(b:mirrors), 'v:val.lnum == lnum && v:val.cols > cols')
+  let mirrors2 = filter(copy(b:mirrors), 'v:val.lnum > lnum')
+
+  let b:stops[num].lnum += 1
+  let b:stops[num].cols = indent
+
+  for item in stops1
+    let item.lnum += 1
+    let item.cols = indent + item.cols - cols
+  endfor
+
+  for item in stops2
+    let item.lnum += 1
+  endfor
+
+  for item in mirrors1
+    let item.lnum += 1
+    let item.cols = indent + item.cols - cols
+    let item.colsEnd = indent + item.colsEnd - cols
+  endfor
+
+  for item in mirrors2
+    let item.lnum += 1
+  endfor
+  echom string(b:stops)
+endfunc
+
 " 更新位置和mirror
 function s:updateChange ()
   let num = b:snip_state.num
   let stopLen = len(b:stops)
+  echom 'aa'
   if num >= stopLen
     call s:remove()
+    return
+  endif
+  let lnum = getpos('.')[1]
+  if lnum > b:stops[num].lnum
+    call s:handleNewLine()
     return
   endif
   let stop = b:stops[num]
