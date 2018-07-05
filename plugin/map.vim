@@ -2,6 +2,8 @@
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
+nnoremap <leader>g :!/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe %<cr>
+
 " quickfix
 nnoremap <space> :make<cr>
 nnoremap <leader>cn :cn<cr>
