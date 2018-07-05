@@ -34,7 +34,7 @@ inoremap <c-i> <c-x><c-i>
 
 function! CleverTab()
   if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-    return "\<Tab>"
+    return "\<tab>"
   else
     return "\<C-N>"
   endif
@@ -66,3 +66,5 @@ onoremap - t_
 nnoremap <F9> :message<cr>
 nnoremap <F8> :set list!<cr>
 nnoremap <leader>z :!google-chrome %<cr>
+
+nnoremap <leader>l :exec exists('syntax_on') ? 'syn off': 'syn on'<CR>
