@@ -8,8 +8,7 @@ function snippet#triggerSnippet ()
 
   " 读取snippet文件,获取对应snippet
   let snippet_dir = $HOME . '/.vim/snippets/'
-  let fn = snippet_dir . &filetype . '.snippet'
-  let snippets = s:readSnippet(fn)
+  let snippets = s:readSnippet(&filetype, snippet_dir)
   let word = s:getWordBelowCursor()
   let snippet = s:getSnippet(word, snippets)
   if len(snippet) == 0 | return '' | endif
@@ -338,11 +337,15 @@ function s:selectWord (word, selectMap)
   endif
 endfunc
 
-" 读取snippet文件
-function s:readSnippet (fn)
-  if !filereadable(a:fn) | return | endif
+function s:readSnippetFile (ft, dir)
+  let snippets = get(g:snippet_cache, a:ft, 0)
+  if type(snippets) == type([])
+    return snippets
+  endif
+  let fn = a:dir . a:ft . '.snippet'
+  if !filereadable(fn) | return [] | endif
   let snippets = []
-  for line in readfile(a:fn)
+  for line in readfile(fn)
     if line[:6] == 'snippet'
       let trigger = strpart(line, 8)
       call add(snippets, { 'trigger': trigger, 'snippet': [] })
@@ -351,6 +354,20 @@ function s:readSnippet (fn)
 	call add(snippets[-1].snippet, line)
       endif
     endif
+  endfor
+  let g:snippet_cache[a:ft] = snippets
+  return snippets
+endfunc
+
+" 读取snippet文件
+function s:readSnippet (ft, dir)
+  let fts = get(g:snippet_filetypes, a:ft, a:ft)
+  if type(fts) == type('')
+    return s:readSnippetFile(fts, a:dir)
+  endif
+  let snippets = []
+  for ft in fts
+    let snippets += s:readSnippetFile(ft, a:dir)
   endfor
   return snippets
 endfunc
