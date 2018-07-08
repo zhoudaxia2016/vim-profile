@@ -96,6 +96,16 @@ function snippet#triggerSnippet ()
     let lnum += 1
   endfor
 
+  let stops = filter(copy(b:stops), 'v:val.lnum == curLine')
+  let mirrors = filter(copy(b:mirrors), 'v:val.lnum == curLine')
+  let l = len(curLineStr) - indent
+  for item in stops
+    let item.cols += l
+  endfor
+  for item in mirrors
+    let item.cols += l
+  endfor
+
   " 拼接之前保存的当前行
   let afterLines[0] = curLineStr . afterLines[0]
   let i = 1
@@ -261,14 +271,12 @@ function s:handleNewLine ()
   for item in mirrors2
     let item.lnum += 1
   endfor
-  echom string(b:stops)
 endfunc
 
 " 更新位置和mirror
 function s:updateChange ()
   let num = b:snip_state.num
   let stopLen = len(b:stops)
-  echom 'aa'
   if num >= stopLen
     call s:remove()
     return
