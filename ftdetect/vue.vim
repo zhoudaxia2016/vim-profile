@@ -1,2 +1,2 @@
-au BufRead,BufNewFile *.vue set filetype=html
+au BufRead,BufNewFile *.vue set filetype=vue
 

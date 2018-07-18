@@ -2,15 +2,16 @@
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-nnoremap <leader>g :!/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe %<cr>
-
 " quickfix
-nnoremap <space> :make<cr>
+nnoremap <leader>m :make<cr>
 nnoremap <leader>cn :cn<cr>
 nnoremap <leader>cp :cp<cr>
 
 " select compiler
 nnoremap <F6> :call SelectCompiler()<cr>
+
+" open chrome
+nnoremap <F12> :!cmdtool wstartex "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" %<cr><cr>
 
 function SelectCompiler ()
   if (exists('b:compilers'))
@@ -44,7 +45,6 @@ inoremap <Tab> <C-R>=CleverTab()<CR>
 " open a help file
 " need to prohibit the terminal <F1> binding
 nnoremap <expr> <F1>  <SID>openHelpFile()
-nnoremap <F12> :helpc<cr>
 function <SID>openHelpFile ()
   echohl Question
   let filename = input("Please input the help file name: ", "", "help")
@@ -53,13 +53,13 @@ function <SID>openHelpFile ()
 endfunction
 
 " move around window
-nnoremap <tab>l <c-w><c-l>
-nnoremap <tab>h <c-w><c-h>
-nnoremap <tab>j <c-w><c-j>
-nnoremap <tab>k <c-w><c-k>
-nnoremap <tab>t <c-w><c-t>
-nnoremap <tab>b <c-w><c-b>
-nnoremap <tab>P <c-w><c-P>
+nnoremap <c-l> <c-w><c-l>
+nnoremap <c-h> <c-w><c-h>
+nnoremap <c-j> <c-w><c-j>
+nnoremap <c-k> <c-w><c-k>
+nnoremap <c-i> <c-w><c-t>
+nnoremap <c-b> <c-w><c-b>
+nnoremap <c-p> <c-w><c-p>
 
 onoremap - t_
 
@@ -68,3 +68,6 @@ nnoremap <F8> :set list!<cr>
 nnoremap <leader>z :!google-chrome %<cr>
 
 nnoremap <leader>l :exec exists('syntax_on') ? 'syn off': 'syn on'<CR>
+
+nnoremap <leader>s :w !sudo tee %<cr>
+nnoremap ; :
