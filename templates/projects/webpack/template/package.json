@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open"
+    "start": "webpack-dev-server --inline --mode=development",
+    "dev": "npm start",
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
@@ -17,14 +19,18 @@
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",{{#frame:react}}
     "eslint-plugin-react": "^7.7.0",
-    "react-hot-loader": "^4.1.1",{{/frame:react}}
+    "react-hot-loader": "^4.1.1",{{/frame:react}}{#frame:vue}}
+    "vue-loader": "^14.2.3",
+    "vue-template-compiler": "^2.5.16",{{/frame:vue}}
+    "css-loader": "^1.0.0",
     "webpack": "^3.10.0",
     "webpack-cli": "^2.0.15",
     "webpack-dev-server": "^2.11.2"
   },
-  "dependencies": {
-    {{#frame:react}}"react": "^16.2.0",
+  "dependencies": {{{#frame:react}}
+    "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "styled-components": "^2.2.4"{{/frame:react}}
+    "styled-components": "^2.2.4",{{/frame:react}}{{#frame:vue}}
+    "vue": "^2.5"{{/frame:vue}}
   }
 }

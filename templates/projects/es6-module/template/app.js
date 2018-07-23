@@ -11,7 +11,7 @@ app.get('/', function (req, res) {
 app.use('/static', express.static('{{!frame:react}}src{{/frame:react}}{{#frame:react}}dist{{/frame:react}}'))
 {{#refresh:poll}}
 let change = false
-let watcher = chokidar.watch('./src')
+let watcher = chokidar.watch('./{{!frame:react}}src{{/frame:react}}{{#frame:react}}dist{{/frame:react}}')
 watcher.on('all', function (event, path) {
   change = true
   console.log('File: ', path)

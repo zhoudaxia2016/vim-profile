@@ -14,5 +14,5 @@ import App from './app.vue'
 
 new Vue({
   el: '#root',
-  components: { App }
+  render: h => h(App)
 }){{/frame:vue}}

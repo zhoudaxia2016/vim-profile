@@ -14,7 +14,10 @@ module.exports = {
         use: ['babel-loader', 'eslint-loader'],
 	enforce: 'pre',
 	exclude: /node_modules/
-      }
+      }{{#frame:vue}}, {
+        test: /\.vue$/,
+        use: 'vue-loader'
+      }{{/frame:vue}}
     ]
   },
   devtool: 'eval-source-map',
@@ -24,6 +27,7 @@ module.exports = {
   ],
   devServer: {
     contentBase: './dist',
-    hot: true
+    hot: true,
+    port: 6060
   }
 }
