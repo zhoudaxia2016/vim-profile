@@ -8,3 +8,4 @@ switch case break default continue
 iterator async await promise
 try catch finally with throw
 undefined null
+setTimeout setInterval clearTimeout clearInterval

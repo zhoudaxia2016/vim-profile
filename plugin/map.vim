@@ -1,7 +1,3 @@
-" modify vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
-
 " quickfix
 nnoremap <leader>m :make<cr>
 nnoremap <leader>cn :cn<cr>
@@ -60,8 +56,7 @@ nnoremap <c-k> <c-w><c-k>
 nnoremap <c-i> <c-w><c-t>
 nnoremap <c-b> <c-w><c-b>
 nnoremap <c-p> <c-w><c-p>
-
-onoremap - t_
+nnoremap <tab> <c-w><c-w>
 
 nnoremap <F9> :message<cr>
 nnoremap <F8> :set list!<cr>
