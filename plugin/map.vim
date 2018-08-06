@@ -1,23 +1,13 @@
 " quickfix
-nnoremap <leader>m :make<cr>
-nnoremap <leader>cn :cn<cr>
-nnoremap <leader>cp :cp<cr>
-
-" select compiler
-nnoremap <F6> :call SelectCompiler()<cr>
+nnoremap cn :cn<cr>
+nnoremap cp :cp<cr>
 
 " open chrome
 nnoremap <F12> :!cmdtool wstartex "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" %<cr><cr>
 
-function SelectCompiler ()
-  if (exists('b:compilers'))
-    let index = input#radio('Select a compiler', b:compilers)
-    exec 'compiler ' . b:compilers[index-1]
-  endif
-endfunction
-
 " file manager
 noremap <F7> :!nautilus . &<cr><cr>
+noremap <leader>,f :!nautilus . &<cr><cr>
 
 " complete
 inoremap <c-k> <c-x><c-k>
@@ -41,6 +31,7 @@ inoremap <Tab> <C-R>=CleverTab()<CR>
 " open a help file
 " need to prohibit the terminal <F1> binding
 nnoremap <expr> <F1>  <SID>openHelpFile()
+nnoremap <expr> <leader><leader>  <SID>openHelpFile()
 function <SID>openHelpFile ()
   echohl Question
   let filename = input("Please input the help file name: ", "", "help")
@@ -59,7 +50,9 @@ nnoremap <c-p> <c-w><c-p>
 nnoremap <tab> <c-w><c-w>
 
 nnoremap <F9> :message<cr>
+nnoremap <leader>,e :message<cr>
 nnoremap <F8> :set list!<cr>
+nnoremap <leader>,l :set list!<cr>
 nnoremap <leader>z :!google-chrome %<cr>
 
 nnoremap <leader>l :exec exists('syntax_on') ? 'syn off': 'syn on'<CR>

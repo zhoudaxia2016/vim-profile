@@ -1,0 +1,11 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/zhou/tes/test/src'
+let g:netrw_dirhist_2='/home/zhou/tes/test/src/router'
+let g:netrw_dirhist_3='/home/zhou/tes/test/src'
+let g:netrw_dirhist_4='/home/zhou/tes/test/src/components'
+let g:netrw_dirhist_5='/home/zhou/tes/test/src'
+let g:netrw_dirhist_6='/home/zhou/tes/test/src/assets'
+let g:netrw_dirhist_7='/home/zhou/tes/test/src'
+let g:netrw_dirhist_8='/home/zhou/tes/abc'
+let g:netrw_dirhist_9='/home/zhou/tes/abc/build'

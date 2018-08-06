@@ -1,8 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/zhou/projects/admin-propagation/src/styles'
-let g:netrw_dirhist_2='/home/zhou/projects/admin-propagation/src'
-let g:netrw_dirhist_3='/home/zhou/projects/admin-propagation/src/utils'
-let g:netrw_dirhist_4='/home/zhou/projects/admin-propagation/src'
-let g:netrw_dirhist_5='/home/zhou/projects/admin-propagation/src/views'
-let g:netrw_dirhist_6='/home/zhou/projects/admin-propagation/src/views/back'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/home/zhou/test/babel-test/node_modules'
+let g:netrw_dirhist_2='/home/zhou/test/babel-test/node_modules/babel-runtime'
+let g:netrw_dirhist_3='/home/zhou/test/babel-test/node_modules/babel-runtime/core-js'
+let g:netrw_dirhist_4='/home/zhou/test/babel-test/dist'
