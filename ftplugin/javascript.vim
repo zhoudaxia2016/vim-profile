@@ -1,22 +1,21 @@
 " compiler
-compiler npm
+compiler eslint
 let b:compilers = ['node', 'npm']
-
-" dict
-setlocal dictionary+=~/.vim/dict/javascript.dict
-setlocal thesaurus+=~/.vim/dict/thesaurus/javascript.dict
 
 " include file search
 let &l:include = 'import\s*\i*\s*from\|import\|require('
 set includeexpr=ExpandFname(v:fname)
 
 function! ExpandFname (fn)
-  let fn = substitute(a:fn, '^\.*', '', 'g')
-  if (match(fn, '\.') !=  -1)
-    return a:fn
-  else
-    return a:fn . '.js'
-  endif
+  let exts = ['js', 'vue']
+  if file_readable(a:fn) | return a:fn | endif
+  for ext in exts
+    let fn = a:fn . '.' . ext
+    if file_readable(fn)
+      return fn
+    endif
+  endfor
+  return a:fn
 endfunction
 
 " define search

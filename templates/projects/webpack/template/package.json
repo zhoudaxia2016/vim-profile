@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --inline --mode=development",
+    "start": "webpack-dev-server --inline"
     "dev": "npm start",
     "build": "webpack"
   },
@@ -19,7 +19,7 @@
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",{{#frame:react}}
     "eslint-plugin-react": "^7.7.0",
-    "react-hot-loader": "^4.1.1",{{/frame:react}}{#frame:vue}}
+    "react-hot-loader": "^4.1.1",{{/frame:react}}{{#frame:vue}}
     "vue-loader": "^14.2.3",
     "vue-template-compiler": "^2.5.16",{{/frame:vue}}
     "css-loader": "^1.0.0",
