@@ -35,5 +35,3 @@ func <SID>make ()
     \ "err_io": "file",
     \ "err_name": "errfile.txt"})
 endfunc
-
-au BufWrite * call <SID>make()
