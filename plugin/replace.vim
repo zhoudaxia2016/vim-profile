@@ -10,16 +10,11 @@ endfunc
 function <SID>find ()
   let flagFile = 'package.json'
   let f = '*'
-  let cur = ''
-  let c = 0
   let search = input#input("请输入查找的单词")
-  while (c < 10)
-    let c += 1
-    if (file_readable(cur . flagFile))
-      exe "vim /" . search . '/ ' . cur . f
-      return feedkeys('<cr>')
-    endif
-    let cur .= '../'
-  endwhile
-  echo "找不到文件:" . flagFile . ", 无法确定搜索目录"
+  let root = utils#findRoot(flagFile)
+  if (root != v:null)
+    exe "vim /" . search . '/ ' . root . f
+  else
+    echo "找不到文件:" . flagFile . ", 无法确定搜索目录"
+  endif
 endfunc
