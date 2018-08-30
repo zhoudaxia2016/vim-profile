@@ -10,7 +10,7 @@ else
   endif
 endif
 
-let errorformat   = '  %l:%c%*[\ ] %m' . ','
+let errorformat   = '%*[\ ]%l:%c%*[\ ] %m' . ','
 let errorformat  .= '%-P%f' . ','
 let errorformat  .= '%-Q✖%.%#' . ','
 

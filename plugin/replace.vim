@@ -9,7 +9,7 @@ endfunc
 
 function <SID>find ()
   let flagFile = 'package.json'
-  let f = '*'
+  let f = 'src/**/*'
   let search = input#input("请输入查找的单词")
   let root = utils#findRoot(flagFile)
   if (root != v:null)

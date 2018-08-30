@@ -1,7 +1,3 @@
-" quickfix
-nnoremap cn :cn<cr>
-nnoremap cp :cp<cr>
-
 " open chrome
 nnoremap <F12> :!cmdtool wstartex "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" %<cr><cr>
 
