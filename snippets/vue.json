@@ -1,0 +1,84 @@
+{
+  "models": {
+    "data": "$$ () {<cr>return {<cr><cr>}<cr>}<up><up><tab><tab><tab>",
+    "created": "$$ () {<cr><cr>}<up><tab><tab>",
+    "watch": "$$: {<cr><cr>}<up><tab><tab>"
+  },
+  "items": [
+    {
+      "name": "data",
+      "trigger": "da",
+      "model": "data"
+    },
+    {
+      "name": "watch",
+      "trigger": "wa",
+      "model": "watch"
+    },
+    {
+      "name": "methods",
+      "trigger": "me",
+      "model": "watch"
+    },
+    {
+      "name": "computed",
+      "trigger": "co",
+      "model": "watch"
+    }, 
+    {
+      "name": "beforeCreated",
+      "trigger": "bc",
+      "model": "created"
+    },
+    {
+      "name": "created",
+      "trigger": "cr",
+      "model": "created"
+    },
+    {
+      "name": "beforeMount",
+      "trigger": "bm",
+      "model": "created"
+    },
+    {
+      "name": "mounted",
+      "trigger": "mo",
+      "model": "created"
+    },
+    {
+      "name": "beforeUpdate",
+      "trigger": "bu",
+      "model": "created"
+    },
+    {
+      "name": "updated",
+      "trigger": "up",
+      "model": "created"
+    },
+    {
+      "name": "activated",
+      "trigger": "ac",
+      "model": "created"
+    },
+    {
+      "name": "deactivated",
+      "trigger": "dac",
+      "model": "created"
+    },
+    {
+      "name": "beforeDestroy",
+      "trigger": "bd",
+      "model": "created"
+    },
+    {
+      "name": "destroyed",
+      "trigger": "de",
+      "model": "created"
+    },
+    {
+      "name": "errorCaptured",
+      "trigger": "er",
+      "model": "created"
+    },
+  ]
+}
