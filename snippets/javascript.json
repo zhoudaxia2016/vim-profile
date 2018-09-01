@@ -1,0 +1,17 @@
+{
+  "models": {
+    "if": "$$ () {<cr>}<up><right><right><right>"
+  },
+  "items": [
+    {
+      "name": "if",
+      "trigger": "if",
+      "model": "if"
+    },
+    {
+      "name": "for",
+      "trigger": "fo",
+      "snippet": "for () {<cr>}<up><right><right><right><right>"
+    }
+  ]
+}

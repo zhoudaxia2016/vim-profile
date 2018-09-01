@@ -11,4 +11,5 @@ function! FiletypeMap ()
   let ft = expand("<amatch>")
   exe "nnoremap <leader>ek :vsplit ~/.vim/dict/" . ft . ".dict<cr>"
   exe "nnoremap <leader>ef :vsplit ~/.vim/ftplugin/" . ft . ".vim<cr>"
+  exe "nnoremap <leader>es :vsplit ~/.vim/snippets/" . ft . ".json<cr>"
 endfunc
