@@ -1,5 +1,6 @@
 nnoremap <leader>r :call <SID>replace()<cr>
 nnoremap <leader>f :call <SID>find()<cr>
+nnoremap <cr> :set hls!<cr>
 
 function <SID>replace ()
   let search = input#input("请输入查找的单词")
