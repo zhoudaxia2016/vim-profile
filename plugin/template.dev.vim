@@ -1,16 +1,22 @@
-let s:ext = expand("%:e")
-let s:args = {'filename': expand("%")}
-let s:tpf = $HOME . '/.vim/templates/files/' . s:ext . '.tpl'
-if filereadable(s:tpf)
-  exec 'au BufNewFile *.' . s:ext . " call LoadTemplate()"
-endif
+exec 'au BufNewFile *' . " call LoadTemplate()"
 
 function! LoadTemplate()
-  exec "0r " . s:tpf
-  for [key, value] in items(s:args)
+  let ft = &filetype
+  let args = {'filename': expand("%")}
+  let tpf = $HOME . '/.vim/templates/files/' . ft . '.tpl'
+
+  if filereadable(tpf)
+    exec "r " . tpf
+    1,1delete
+  else
+    return
+  endif
+
+  for [key, value] in items(args)
     exec ':1,$s/{%' . key . '%}/' . value . '/ge'
   endfor
   let pattern = '{%[^%]*%}'
+
   while 1
     try
       exec "/" . pattern
@@ -19,6 +25,7 @@ function! LoadTemplate()
       let value = input("Input " . key . ":\n")
       exec ':1,$s/{%' . key . '%}/' . value . '/ge'
     catch '.*'
+      call feedkeys('<cr>')
       break
     endtry
   endwhile
