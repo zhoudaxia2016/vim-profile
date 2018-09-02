@@ -24,7 +24,6 @@ nnoremap <c-l> <c-w><c-l>
 nnoremap <c-h> <c-w><c-h>
 nnoremap <c-j> <c-w><c-j>
 nnoremap <c-k> <c-w><c-k>
-nnoremap <c-i> <c-w><c-t>
 nnoremap <c-b> <c-w><c-b>
 nnoremap <c-p> <c-w><c-p>
 nnoremap <tab> <c-w><c-w>
