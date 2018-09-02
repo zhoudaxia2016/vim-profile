@@ -17,9 +17,15 @@ function! input#confirm (question)
   return sel%2
 endfunc
 
-function! input#input (question)
+function! input#input (...)
+  let question = a:1
   echohl Title
-  let inp = input(a:question . ":\n")
+  if (a:0 > 1)
+    let completeType = a:2
+    let inp = input(question . ":\n", '',  completeType)
+  else
+    let inp = input(question . ":\n")
+  endif
   echohl None
   return inp
 endfunc

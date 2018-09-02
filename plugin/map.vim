@@ -13,6 +13,9 @@ function <SID>openHelpFile ()
   echohl Question
   let filename = input("Please input the help file name: ", "", "help")
   echohl None
+  if (filename == '')
+    return ''
+  endif
   return ':h ' . filename . "\<cr>"
 endfunction
 
