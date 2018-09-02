@@ -26,7 +26,6 @@ nnoremap <c-j> <c-w><c-j>
 nnoremap <c-k> <c-w><c-k>
 nnoremap <c-b> <c-w><c-b>
 nnoremap <c-p> <c-w><c-p>
-nnoremap <tab> <c-w><c-w>
 
 nnoremap <F9> :message<cr>
 nnoremap <leader>,e :message<cr>
