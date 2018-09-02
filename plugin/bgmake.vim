@@ -3,11 +3,12 @@ nnoremap <F6> :call SelectCompiler()<cr>
 nnoremap <leader>sc :call SelectCompiler()<cr>
 nnoremap <leader>m :call <SID>make()<cr>
 
+au BufWritePost * call <SID>make()
+
 " quickfix
 nnoremap <expr> cn <SID>jumpNextOrFirstError()
 nnoremap cp :cp<cr>
 nnoremap cf :cf<cr>
-
 let b:justAfterCompile = 1
 
 function SelectCompiler ()
@@ -17,27 +18,41 @@ function SelectCompiler ()
   endif
 endfunction
 
-func MakeHandler (channel, msg)
-  if a:msg != ''
-    exe "cadde '" . substitute(a:msg, "'", "\"", "g") . "'"
-  endif
+func MakeExitHandler (channel, msg)
+  exe "cg " . b:tmpfile
   let qflist = getqflist()
   let num = len(qflist)
+  if (num == 0)
+    echo "Good job! No error exists."
+  else
+    echohl ErrorMsg
+    echo num . " error(s) need you to fix!"
+    echohl None
+  endif
 endfunc
 
 func <SID>make ()
-  let b:justAfterCompile = 1
   let cmd = &l:makeprg
+  if (cmd == '')
+    return
+  endif
+  let b:justAfterCompile = 1
+  let b:tmpfile = tempname()
   let cmd = substitute(cmd, '%', expand('%'), 'g')
   echom cmd
-  let b:compilerJob = job_start(cmd, {
-    \ "callback": "MakeHandler"})
+  call job_start(cmd, {
+    \ "exit_cb": "MakeExitHandler",
+    \ "out_io": "file",
+    \ "out_name": b:tmpfile,
+    \ "err_io": "file",
+    \ "err_name": b:tmpfile})
+  call feedkeys('<cr>')
 endfunc
 
 func <SID>jumpNextOrFirstError ()
-  if exists('b:justAfterCompile') && b:justAfterCompile == 1
+  if b:justAfterCompile == 1
     let b:justAfterCompile = 0
-    return ":cf\<cr>"
+    return ":cfir\<cr>"
   else
     return ":cn\<cr>"
   endif
