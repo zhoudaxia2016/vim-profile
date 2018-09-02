@@ -19,6 +19,7 @@ let mapleader=" "
 set backspace=indent,eol,start
   
 colors onedark
+set list listchars=trail:_
 
 if (empty($TMUX))
   if (has("nvim"))
