@@ -24,7 +24,7 @@
     },
     {
       "name": "console",
-      "trigger": "co",
+      "trigger": "cs",
       "snippet": "console.log()<left>"
     },
     {
