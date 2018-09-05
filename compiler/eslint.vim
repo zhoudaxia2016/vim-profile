@@ -15,6 +15,9 @@ let errorformat  .= '%-P%f' . ','
 let errorformat  .= '%-Q✖%.%#' . ','
 
 let cmd = "eslint %"
+if &filetype == 'vue'
+  let cmd = "eslint -c " . $HOME . '/.vim//compiler/config/eslintrc.js %'
+endif
 
 let &l:makeprg = cmd
 let &l:errorformat = errorformat . '%-G%.%#'
