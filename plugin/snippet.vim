@@ -1,5 +1,3 @@
-au Filetype * call <SID>generateSnippet()
-
 function <SID>generateSnippet ()
   let ft = expand("<amatch>")
   let fn = $HOME . '/.vim/snippets/' . ft . '.json'
@@ -19,6 +17,4 @@ function <SID>generateSnippet ()
   endif
 endfunc
 
-let b:moreSnippets = {
-  \ 'vue': ['javascript']
-  \}
+au Filetype * call <SID>generateSnippet()
