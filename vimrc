@@ -14,6 +14,8 @@ filetype plugin on
 syntax on
 set softtabstop=2
 set shiftwidth=2
+set tabstop=2
+set expandtab
 set noswapfile
 let mapleader=" "
 set backspace=indent,eol,start
