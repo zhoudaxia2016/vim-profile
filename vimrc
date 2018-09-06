@@ -19,7 +19,7 @@ set expandtab
 set noswapfile
 let mapleader=" "
 set backspace=indent,eol,start
-  
+ 
 colors onedark
 set list listchars=trail:_
 
@@ -39,3 +39,5 @@ set ttyfast
 autocmd FileType netrw setl bufhidden=delete
 set undofile
 set undodir=/tmp/
+
+nnoremap x "_x"
