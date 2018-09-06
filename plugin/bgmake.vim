@@ -50,7 +50,7 @@ func <SID>make ()
 endfunc
 
 func <SID>jumpNextOrFirstError ()
-  if b:justAfterCompile == 1
+  if exists('b:justAfterCompile') && b:justAfterCompile == 1
     let b:justAfterCompile = 0
     return ":cfir\<cr>"
   else
