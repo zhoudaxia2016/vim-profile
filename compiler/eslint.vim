@@ -14,12 +14,13 @@ let errorformat   = '%*[\ ]%l:%c%*[\ ] %m' . ','
 let errorformat  .= '%-P%f' . ','
 let errorformat  .= '%-Q✖%.%#' . ','
 
-let cmd = "eslint %"
-if &filetype == 'vue'
-  let cmd = "eslint -c " . $HOME . '/.vim/compiler/config/eslintrc.js %'
+let rootDir = utils#findRoot('package.json')
+if rootDir != v:null
+  let cmd = rootDir . 'node_modules/.bin/eslint %'
+else
+  let cmd = 'eslint %'
 endif
 
 let &l:makeprg = cmd
 let &l:errorformat = errorformat . '%-G%.%#'
 au! QuickFixCmdPost make
-
