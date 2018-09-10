@@ -1,4 +1,9 @@
 function <SID>generateSnippet ()
+  if exists('b:loadSnippetPlugin')
+    return
+  else
+    let b:loadSnippetPlugin = 1
+  endif
   let ft = expand("<amatch>")
   let fn = $HOME . '/.vim/snippets/' . ft . '.json'
   if (file_readable(fn))
