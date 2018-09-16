@@ -2,8 +2,12 @@
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module"
-  },{{#frame:react}}
-  "extends": ["plugin:react/recommended"],{{/frame:react}}
+  },
+  "extends": [
+     {{#frame:react}}"plugin:react/recommended",
+     {{/frame:react}}{{#frame:vue}}"plugin:vue/essential",
+     {{/frame:vue}}"standard"
+  ],
   "env": {
     "node": true,
     "browser": true
