@@ -11,7 +11,7 @@ let mdfile = process.argv[2]
 
 // 编译markdown的插件
 let showdown = require('showdown'),
-  converter = new showdown.Converter() 
+  converter = new showdown.Converter()
 converter.setOption('tables', true)
 converter.setOption('tasklists', true)
 converter.setOption('underline', true)
@@ -24,13 +24,14 @@ app.engine('.hbs', exphbs({extname: '.hbs'}))
 app.set('view engine', '.hbs')
 
 app.get('/', function (req, res) {
-  let md = fs.readFileSync(mdfile).toString()
-  let html
-  if (md) {
-    html = converter.makeHtml(md)
+  let content = fs.readFileSync(mdfile)
+  let md
+  if (content) {
+    md = content.toString()
   } else {
-    html = ''
+    md = ''
   }
+  html = converter.makeHtml(md)
   res.render('index.hbs', {html})
 })
 

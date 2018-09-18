@@ -1,0 +1,27 @@
+#app {
+  margin: 30px auto;
+  padding: 20px 30px;
+  width: 1000px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+h1, h2 {
+  border-bottom: 1px solid #ddd;
+}
+
+pre {
+  padding: 10px;
+  border-radius: 4px;
+  color: #000;
+  background: #f6f8fa;
+}
+
+blockquote {
+  margin-left: 0;
+  padding-left: 40px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border-left: 7px solid #dfe2e5;
+  opacity: .6;
+}

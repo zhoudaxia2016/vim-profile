@@ -19,6 +19,7 @@ function SelectCompiler ()
 endfunction
 
 func MakeExitHandler (channel, msg)
+  if !exists('b:tmpfile') | return | endif
   exe "cg " . b:tmpfile
   let qflist = getqflist()
   let num = len(qflist)
