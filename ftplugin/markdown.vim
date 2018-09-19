@@ -1,4 +1,4 @@
-let cmd = 'node ' . $HOME . '/.vim/tools/instant-md2html-server/app.js ' . expand('%:p')
+let cmd = 'node ' . $HOME . '/.vim/tools/instant-md2html-server/app.js ' . expand('%:p') . ' floworg'
 
 function ErrorHandler (ch, msg)
   echoerr "[Err in md2html server] " . a:msg
