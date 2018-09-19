@@ -8,6 +8,10 @@ let app = express()
 let chokidar = require('chokidar')
 let baseDir = __dirname
 let mdfile = process.argv[2]
+let theme = 'github'
+if (process.argv.length > 3) {
+  theme = process.argv[3]
+}
 
 // 编译markdown的插件
 let showdown = require('showdown'),
@@ -32,7 +36,7 @@ app.get('/', function (req, res) {
     md = ''
   }
   html = converter.makeHtml(md)
-  res.render('index.hbs', {html})
+  res.render('index.hbs', {html, theme})
 })
 
 app.use('/static', express.static(baseDir + '/src'))
