@@ -9,11 +9,11 @@ inoremap <c-i> <c-x><c-i>
 
 function! CleverTab()
   if strpart(getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-    return "\<tab>"
+    return "a\<esc>==xa"
   else
     return "\<C-N>"
   endif
-endfunction | normal ==
+endfunction
 inoremap <Tab> <C-R>=CleverTab()<CR>
 
 set cpt+=k
