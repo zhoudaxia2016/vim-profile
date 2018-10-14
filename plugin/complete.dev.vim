@@ -9,7 +9,7 @@ inoremap <c-i> <c-x><c-i>
 
 function! CleverTab()
   if strpart(getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-    return "a\<esc>==xa"
+    return "a\<esc>==xA"
   else
     return "\<C-N>"
   endif

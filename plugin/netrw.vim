@@ -1,4 +1,3 @@
-nnoremap <leader>d :Vex<cr>
 let netrw_banner = 0
 let g:netrw_dirhistmax = 0
 let g:netrw_browse_split = 0
@@ -6,6 +5,7 @@ let g:netrw_list_hide= '^\.'
 let g:netrw_winsize=16
 let g:netrw_bufsettings="nonu rnu wrap"
 let g:netrw_use_noswf= 0
+set autochdir
 
 function! ToggleExplorer()
   if exists("t:expl_buf_num")
@@ -17,11 +17,11 @@ function! ToggleExplorer()
       exec cur_win_nr . 'wincmd w'
       unlet t:expl_buf_num
     else
-	unlet t:expl_buf_num
+        unlet t:expl_buf_num
     endif
   else
     exec '1wincmd w'
-    Lexplore
+    Lexplore .
     let t:expl_buf_num = bufnr("%")
   endif
 endfunction
