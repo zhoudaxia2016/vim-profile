@@ -1,6 +1,7 @@
 let express = require('express')
 let path = require('path')
 let fs = require('fs')
+let getFreePort = require('./getFreePort')
 
 let host = 'localhost'
 let port = 3000
@@ -41,17 +42,23 @@ app.get('/', function (req, res) {
 
 app.use('/static', express.static(baseDir + '/src'))
 
-let server = app.listen(port, function () {
-  console.log('Example app listening at http://%s:%s', host, port)
+let c = require('child_process')
+getFreePort(port, p => {
+  app.get('/getport', function (req, res) {
+    res.end(port)
+  })
+  let server = app.listen(p, function () {
+    console.log('Example app listening at http://%s:%s', host, p)
+  })
+  let io = require('socket.io')(server)
+  fs.watch(mdfile, (event, fn) => {
+    md2html(fn, io)
+  })
+  // 打开浏览器
+  c.exec(`xdg-open http://${host}:${p}`)
 })
 
-let io = require('socket.io')(server)
-
-fs.watch(mdfile, (event, fn) => {
-  md2html(fn)
-})
-
-function md2html (fn) {
+function md2html (fn, io) {
   fs.readFile(fn, (err, content) => {
     let md = content.toString()
     let html = converter.makeHtml(md)
@@ -61,7 +68,3 @@ function md2html (fn) {
     })
   })
 }
-
-// 打开浏览器
-let c = require('child_process')
-c.exec(`xdg-open http://${host}:${port}`)

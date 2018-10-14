@@ -1,3 +1,4 @@
+vertical res 20
 nmap <buffer> h -
 nmap <buffer> l <cr>
 
