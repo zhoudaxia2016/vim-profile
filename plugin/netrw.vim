@@ -35,6 +35,7 @@ function! Netrw_mappings()
   noremap <buffer> % :call CreateInPreview()<cr>
   noremap <buffer> f :call SplitFile()<cr>
   noremap <buffer> ( :call CreateFile()<cr>
+  vertical res 20
 endfunc
 
 function! CreateInPreview ()
