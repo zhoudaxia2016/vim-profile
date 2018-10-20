@@ -28,6 +28,11 @@
       "snippet": "console.log()<left>"
     },
     {
+      "name": "alert",
+      "trigger": "al",
+      "snippet": "alert()<left>"
+    },
+    {
       "name": "funtion",
       "trigger": "fu",
       "snippet": "function  () {<cr>}<up><right><right><right><right><right><right><right><right>"
@@ -59,12 +64,12 @@
     },
     {
       "name": "arrowFunc",
-      "trigger": "ar",
+      "trigger": "ar#",
       "snippet": "() => {<cr>}<up>"
     },
     {
       "name": "arrowFuncSimple",
-      "trigger": "arr",
+      "trigger": "ar@",
       "snippet": "<space>=><space><left><left><left><left>"
     },
     {
