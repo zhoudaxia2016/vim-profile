@@ -7,7 +7,9 @@ function! OuputHandler (ch, msg)
   echoerr "[Ouput in md2html server] " . a:msg
 endfunc
 
-w
-let job = job_start(cmd, {'err_cb': 'ErrorHandler'})
+if expand('%:p') !~ '/tmp'
+  w
+endif
+"let job = job_start(cmd, {'err_cb': 'ErrorHandler'})
 setlocal nowritebackup
 autocmd TextChanged,TextChangedI <buffer> silent write
