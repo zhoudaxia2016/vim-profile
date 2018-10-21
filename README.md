@@ -34,7 +34,7 @@
       <td>自带netrw插件</td>
     </tr>
     <tr>
-      <td rowspan="5" class="t">项目开发</td>
+      <td rowspan="6" class="t">项目开发</td>
       <td>搜索替换</td>
       <td>3.5</td>
       <td>自带搜索替换功能</td>
@@ -58,6 +58,11 @@
       <td>git flow</td>
       <td>1</td>
       <td>使用vimdiff作为diff.tool,git log和git status结果用vim打开</td>
+    </tr>
+    <tr>
+      <td>远程编辑</td>
+      <td>3</td>
+      <td>使用netrw远程编辑，用expect和ssh -N xxx建立socket链接，不用每次保存都输入密码</td>
     </tr>
     <tr>
       <td rowspan="2" class="t">其他</td>
