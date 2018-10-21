@@ -10,6 +10,6 @@ endfunc
 if expand('%:p') !~ '/tmp'
   w
 endif
-"let job = job_start(cmd, {'err_cb': 'ErrorHandler'})
+nnoremap <F1> :call job_start(cmd, {'err_cb': 'ErrorHandler'})<cr>
 setlocal nowritebackup
 autocmd TextChanged,TextChangedI <buffer> silent write
