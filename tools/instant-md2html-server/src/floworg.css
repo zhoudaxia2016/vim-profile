@@ -116,37 +116,37 @@ a:hover {
    width: 800px;
 }
 
-table {
+.table-users table {
    width: 100%;
 }
 
-td, th {
+.table-users td, .table-users th {
   color: #4b8c74;
   padding: 10px;
 }
 
-td {
+.table-users td {
   text-align: center;
   vertical-align: middle;
 }
 
-td:last-child {
+.table-users td:last-child {
   font-size: 0.95em;
   line-height: 1.4;
   text-align: left;
 }
 
-th {
+.table-users th {
   border-bottom: #4b8c74 solid 1px;
   background-color: #cffc83;
   font-weight: 700;
   color: #444;
 }
 
-tr:nth-child(2n) {
+.table-users tr:nth-child(2n) {
   background-color: white;
 }
-tr:nth-child(2n+1) {
+.table-users tr:nth-child(2n+1) {
   background-color: #cffc83;
 }
 .t {
