@@ -59,6 +59,3 @@ endfunc
 function! GetCursorFile ()
   return trim(getline('.'))
 endfunc
-
-" 打开新的文件时保存原来的文件
-au BufWinLeave * if &readonly!=1 && &filetype!='netrw' | w | endif
