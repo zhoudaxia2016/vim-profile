@@ -1,41 +1,13 @@
-{
-  "name": "{{ name }}",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "webpack-dev-server --inline"
-    "dev": "npm start",
-    "build": "webpack"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",{{#frame:react}}
-    "babel-preset-react": "^6.24.1",{{/frame:react}}
-    "eslint": "^4.19.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-node": "^7.0.1",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-loader": "^2.0.0",{{#frame:vue}}
-    "eslint-plugin-vue": "^4.7.1",{{/frame:vue}}{{#frame:react}}
-    "eslint-plugin-react": "^7.7.0",
-    "react-hot-loader": "^4.1.1",{{/frame:react}}{{#frame:vue}}
-    "vue-loader": "^14.2.3",
-    "vue-template-compiler": "^2.5.16",{{/frame:vue}}
-    "css-loader": "^1.0.0",
-    "webpack": "^3.10.0",
-    "webpack-cli": "^2.0.15",
-    "webpack-dev-server": "^2.11.2"
-  },
-  "dependencies": {{{#frame:react}}
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "styled-components": "^2.2.4",{{/frame:react}}{{#frame:vue}}
-    "vue": "^2.5"{{/frame:vue}}
-  }
-}
+"dependencies": {
+  "vue": "^2.5.2"{{#if_eq frame vue}},
+  "vue-router": "^3.0.1"{{/if_eq}}
+},
+"dependencies": {
+  "vue": "^2.5.2"{{#if_eq frame vue}}
+  "vue-router": "^3.0.1"{{/if_eq}}
+},
+abc
+{{#if_eq frame vue}}
+use vue
+{{/if_eq}}
+def
