@@ -23,6 +23,7 @@ endfunction
 nnoremap <F5> :call NumberToggle()<cr>
 
 function! NumberToggle ()
-  set relativenumber!  
+  set relativenumber!
   set number!
+  IndentLinesToggle
 endfunction

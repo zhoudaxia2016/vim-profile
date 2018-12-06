@@ -1,22 +1,29 @@
 <html>
   <head>
     <title>{{name}}</title>
-    {{#frame:react}}<!-- Product Mode
+    {{#if_eq frame react}}
+    <!-- Product Mode
     <script src="https://cdn.bootcss.com/react/16.4.0-alpha.0911da3/umd/react.production.min.js"></script>
     <script src="https://cdn.bootcss.com/react-dom/16.4.0-alpha.0911da3/umd/react-dom.production.min.js"></script>
     -->
     <script src="https://cdn.bootcss.com/react/16.4.0-alpha.0911da3/umd/react.development.js"></script>
-    <script src="https://cdn.bootcss.com/react-dom/16.4.0-alpha.0911da3/umd/react-dom.development.js"></script>{{/frame:react}}{{#frame:vue}}<!-- Product Mode
+    <script src="https://cdn.bootcss.com/react-dom/16.4.0-alpha.0911da3/umd/react-dom.development.js"></script>
+    {{/if_eq}}
+    {{#if_eq frame vue}}
+    <!-- Product Mode
     <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
     -->
-    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>{{/frame:vue}}{{#refresh:socketio}}
-    <script src="https://cdn.bootcss.com/socket.io/2.1.0/socket.io.js"></script>{{/refresh:socketio}}
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+    {{/if_eq}}
+    {{#if_eq refresh socketio}}
+    <script src="https://cdn.bootcss.com/socket.io/2.1.0/socket.io.js"></script>
+    {{/if_eq}}
   </head>
   <body>
-    <div class="app">{{#frame:vue}}
-      <App/>
-    {{/frame:vue}}</div>
-    <script type="module" src="/static/index.js"></script>{{#refresh:poll}}
+    <div id="app">
+    </div>
+    <script type="module" src="/static/index.js"></script>
+    {{#if_eq refresh poll}}
     <script>
 setInterval(() => {
   fetch('/need/to/update')
@@ -25,7 +32,8 @@ setInterval(() => {
       if (change === 'true') window.location.reload()
     })
 }, 1000)
-    </script>{{/refresh:poll}}{{#refresh:socketio}}
+    </script>{{/if_eq}}
+    {{#if_eq refresh socketio}}
     <script>
 let socket = io('http://localhost:3000')
 socket.on('message', data => {
@@ -34,7 +42,7 @@ socket.on('message', data => {
     window.location.reload()
   }
 })
-    </script>{{/refresh:socketio}}
+    </script>
+    {{/if_eq}}
   </body>
 </html>
-

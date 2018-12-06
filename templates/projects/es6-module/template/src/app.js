@@ -1,12 +1,17 @@
-{{#frame:react}}function App (props) {
+{{#if_eq frame react}}
+function App (props) {
   return (
     <div>Hello {props.name}</div>
   )
-}{{/frame:react}}{{#frame:vue}}let App = {
+}
+{{/if_eq}}
+{{#if_eq frame vue}}
+let App = {
   template: '<div>Hello {%{name}%}</div>',
   data () {
     return { name: 'Mao' }
   }
-}{{/frame:vue}}
+}
+{{/if_eq}}
 
 export default App

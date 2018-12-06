@@ -2,11 +2,7 @@ set nu
 set relativenumber
 set scrolloff=3
 set swb=useopen
-augroup setnumber
-  au!
-  autocmd InsertEnter * :set norelativenumber
-  autocmd InsertLeave * :set relativenumber
-augroup END
+set relativenumber
 set wrap
 set nocompatible
 filetype indent on
@@ -39,5 +35,10 @@ set ttyfast
 autocmd FileType netrw setl bufhidden=delete
 set undofile
 set undodir=/tmp/
-
-nnoremap x "_x"
+au BufReadPost * exe "normal! g'\""
+autocmd BufReadPost *
+      \ try |
+      \ if line("'\"") > 0 |
+      \ exe "normal g'\"" |
+      \ endif |
+      \ endtry
