@@ -53,7 +53,6 @@ endfunc
 function! CreateFile ()
   let l:fn = input#input("Please enter filename")
   exec 'silent vs ' . b:netrw_curdir. '/' .l:fn
-  redraw!
 endfunc
 
 function! GetCursorFile ()

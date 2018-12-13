@@ -17,12 +17,13 @@ function! LoadTemplate()
   endfor
   let pattern = '{%[^%]*%}'
 
+  redraw
   while 1
     try
       exec "/" . pattern
       exec "normal! n"
       let key = expand('<cword>')
-      let value = input("Input " . key . ":\n")
+      let value = input#input("Input " . key . ":\n")
       exec ':1,$s/{%' . key . '%}/' . value . '/ge'
     catch '.*'
       call feedkeys('<cr>')
