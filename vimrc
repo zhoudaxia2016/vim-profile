@@ -35,10 +35,9 @@ set ttyfast
 autocmd FileType netrw setl bufhidden=delete
 set undofile
 set undodir=/tmp/
-au BufReadPost * exe "normal! g'\""
 autocmd BufReadPost *
       \ try |
-      \ if line("'\"") > 0 |
+      \ if &filetype != 'gitcommit' && line("'\"") > 0 |
       \ exe "normal g'\"" |
       \ endif |
       \ endtry
