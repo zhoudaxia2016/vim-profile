@@ -1,4 +1,5 @@
 au Filetype * call <SID>setDict()
+set iskeyword+=-
 
 function <SID>setDict ()
   let ft = expand("<amatch>")
@@ -14,5 +15,7 @@ endfunc
 
 let b:moreDicts = {
   \ "vue": ['javascript', 'css'],
-  \ "html": ['javascript', 'css']
+  \ "html": ['javascript', 'css'],
+  \ "wxml": ['mp'],
+  \ "wxss": ['mp']
   \}
