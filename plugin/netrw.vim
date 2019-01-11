@@ -56,5 +56,5 @@ function! CreateFile ()
 endfunc
 
 function! GetCursorFile ()
-  return trim(getline('.'))
+  return substitute(trim(getline('.')), '\*', '', 'g')
 endfunc

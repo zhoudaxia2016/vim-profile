@@ -16,3 +16,9 @@ func utils#findRoot (flagFileOrDir)
   endwhile
   return v:null
 endfunc
+
+func utils#readDict (name)
+  let dictDir = expand('$HOME') . '/.vim/dict/'
+  let lines = readfile(dictDir . a:name . '.dict')
+  return join(lines, ' ')
+endfunc

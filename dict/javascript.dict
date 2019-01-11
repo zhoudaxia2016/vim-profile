@@ -9,3 +9,4 @@ iterator async await promise
 try catch finally with throw
 undefined null
 setTimeout setInterval clearTimeout clearInterval
+String Boolean Number Math Object Array Map Set
