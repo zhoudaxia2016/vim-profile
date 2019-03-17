@@ -1,26 +1,28 @@
 {
   "models": {
+    "if": "$$ () {<c-b>",
+    "try": "$$ {<cr>"
   },
   "items": [
     {
       "name": "if",
       "trigger": "if",
-      "snippet": "if () {<cr>}<up><right><right><right>"
+      "model": "if"
     },
     {
       "name": "for",
       "trigger": "fo",
-      "snippet": "for () {<cr>}<up><right><right><right><right>"
+      "model": "if"
     },
     {
       "name": "switch",
       "trigger": "sw",
-      "snippet": "switch () {<cr>case<cr>}<up><up><right><right><right><right><right><right><right>"
+      "model": "if"
     },
     {
       "name": "while",
       "trigger": "wh",
-      "snippet": "while () {<cr>}<up><right><right><right><right><right><right>"
+      "model": "if"
     },
     {
       "name": "console",
@@ -33,64 +35,44 @@
       "snippet": "alert()<left>"
     },
     {
-      "name": "funtion",
-      "trigger": "fu",
-      "snippet": "function  () {<cr>}<up><right><right><right><right><right><right><right><right>"
-    },
-    {
       "name": "catch",
       "trigger": "ca",
-      "snippet": "catch () {<cr>}<up><right><right><right><right><right><right>"
+      "model": "if"
     },
     {
       "name": "else",
       "trigger": "el",
-      "snippet": "else {<cr><cr>}<up><tab><tab>"
-    },
-    {
-      "name": "elif",
-      "trigger": "ef",
-      "snippet": "else if () {<cr>}<up><right><right><right><right><right><right><right><right>"
+      "model": "try"
     },
     {
       "name": "try",
       "trigger": "tr",
-      "snippet": "try () {<cr>}<up><right><right><right><right>"
+      "model": "try"
     },
     {
       "name": "with",
       "trigger": "wi",
-      "snippet": "with () {<cr>}<up><right><right><right><right><right>"
+      "model": "if"
     },
     {
       "name": "arrowFunc",
-      "trigger": "ar#",
-      "snippet": "() => {<cr>}<up>"
-    },
-    {
-      "name": "arrowFuncSimple",
-      "trigger": "ar@",
-      "snippet": "<space>=><space><left><left><left><left>"
+      "trigger": "ar",
+      "snippet": "() => {<c-b>"
     },
     {
       "name": "class",
       "trigger": "cl",
-      "snippet": "class  {<cr>}<up><right><right><right><right><right>"
+      "model": "try"
     },
     {
-      "name": "prototype",
-      "trigger": "pr",
-      "snippet": ".prototype.<left><left><left><left><left><left><left><left><left><left><left>"
-    },
-    {
-      "name": "import",
+      "name": "importDefault",
       "trigger": "im",
       "snippet": "import  from <left><left><left><left><left><left>"
     },
     {
       "name": "importProp",
       "trigger": "imp",
-      "snippet": "import {} from <left><left><left><left><left><left><left>"
+      "snippet": "import {} from <c-b>"
     },
     {
       "name": "exportDefault",
@@ -98,14 +80,14 @@
       "snippet": "export default "
     },
     {
-      "name": "exportDefaultFunc",
+      "name": "export default funtion",
       "trigger": "edf",
-      "snippet": "export default funtion () {<cr>}<up><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right><right>"
+      "model": "if"
     },
     {
       "name": "exportConst",
       "trigger": "ec",
       "snippet": "export const  = <left><left><left>"
-    },
+    }
   ]
 }

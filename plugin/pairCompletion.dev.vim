@@ -1,7 +1,18 @@
 let s:brackets = ["()", "[]", "{}"]
 let s:quotations = ['"', "'", "`"]
 
-inoremap <cr> <cr><esc>ko
+inoremap <cr> <c-r>=<SID>mapEnter()<cr>
+
+function <SID>mapEnter ()
+  let curChar = getline('.')[col('.')-1]
+  for b in s:brackets
+    if b[1] == curChar
+      return "\<cr>\<esc>ko"
+    endif
+  endfor
+  return "\<cr>"
+endfunc
+
 au InsertLeave * call <SID>clear()
 function <SID>clear()
   if exists('w:quot_stack')
