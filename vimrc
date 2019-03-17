@@ -15,8 +15,8 @@ set expandtab
 set noswapfile
 let mapleader=" "
 set backspace=indent,eol,start
- 
-colors onedark
+
+colors snazzy
 set list listchars=trail:_
 
 if (empty($TMUX))
