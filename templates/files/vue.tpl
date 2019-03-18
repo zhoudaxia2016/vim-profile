@@ -3,9 +3,8 @@
 
 <script>
 export default {
-  name: '{%name%}'
 }
 </script>
 
-<style lang="{%lang%}">
+<style lang="scss">
 </style>
