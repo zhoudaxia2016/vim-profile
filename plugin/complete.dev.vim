@@ -8,8 +8,8 @@ inoremap <c-o> <c-x><c-o>
 inoremap <c-i> <c-x><c-i>
 
 function! CleverTab()
-  if strpart(getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-    return "a\<esc>==xA"
+  if strpart(getline('.'), 0, col('.')-1) =~ '^\s*$'
+    return "\<Tab>"
   else
     return "\<C-N>"
   endif

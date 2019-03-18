@@ -1,6 +1,3 @@
-" open chrome
-nnoremap <F12> :!cmdtool wstartex "C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" %<cr><cr>
-
 " file manager
 noremap <F7> :!nautilus . &<cr><cr>
 noremap <leader>,f :!nautilus . &<cr><cr>
