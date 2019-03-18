@@ -1,8 +1,8 @@
 {
   "models": {
-    "data": "$$ () {<cr>return {<cr><cr>}<cr>}<up><up><tab><tab><tab>",
-    "created": "$$ () {<cr><cr>}<up><tab><tab>",
-    "watch": "$$: {<cr><cr>}<up><tab><tab>"
+    "data": "$$ () {<cr>return {<cr>",
+    "created": "$$ () {<cr>",
+    "watch": "$$: {<cr>"
   },
   "items": [
     {

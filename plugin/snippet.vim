@@ -15,11 +15,13 @@ function <SID>generateSnippet ()
     for ft in get(b:moreSnippets, ft)
       let fn = $HOME . '/.vim/snippets/' . ft . '.json'
       if (file_readable(fn))
-	let json = json#readfile(fn)
-	call snippet#generateSnippet(json.items, json.models)
+  let json = json#readfile(fn)
+  call snippet#generateSnippet(json.items, json.models)
       endif
     endfor
   endif
 endfunc
 
 au Filetype * call <SID>generateSnippet()
+inoremap <c-j> <esc>/()\\|{}<cr>a
+inoremap <c-b> <esc>?()\\|{}<cr>a

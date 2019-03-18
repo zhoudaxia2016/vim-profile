@@ -2,7 +2,6 @@
 
 > 基本都是利用原始的vim功能实现的
 
----
 <div class="table-users">
   <div class="header">已经实现的功能</div>
   <table border="0" cellspacing="0" style="width:100%">
@@ -16,7 +15,7 @@
       <td rowspan="4" class="t">基本编辑</td>
       <td>缩进</td>
       <td>4</td>
-      <td>使用基本的tab设置就可以了，再有就是还要设置cleverTab，一键tab缩进</td>
+      <td>使用基本的tab设置就可以了，再有就是还要设置cleverTab</td>
     </tr>
     <tr>
       <td>补全</td>
@@ -26,7 +25,7 @@
     <tr>
       <td>高亮</td>
       <td>4</td>
-      <td>onedark配色,以上功能还要考虑vue文件的配置,在公司电脑上利用了终端的配色</td>
+      <td>snizzy配色,以上功能还要考虑vue文件的配置,在公司电脑上利用了终端的配色</td>
     </tr>
     <tr>
       <td>文件浏览</td>
