@@ -13,13 +13,6 @@ function <SID>mapEnter ()
   return "\<cr>"
 endfunc
 
-au InsertLeave * call <SID>clear()
-function <SID>clear()
-  if exists('w:quot_stack')
-    unlet w:quot_stack
-  endif
-endfunc
-
 let l = len(s:brackets)
 let i = 0
 while(i < l)
@@ -36,23 +29,25 @@ while(i < l)
 endwhile
 
 function InputQuot (i)
-  if exists('w:quot_stack') && len(w:quot_stack) > 0
-    if w:quot_stack[-1] == a:i
-      call remove(w:quot_stack, -1)
-      return "\<right>"
-    else
-      call add(w:quot_stack, a:i)
-      return s:quotations[a:i] . s:quotations[a:i] . "\<left>"
-    endif
+  let curline = getline('.')
+  let column = col('.')
+  let currentChar = curline[column - 1]
+  let lastChar = curline[column - 2]
+  if currentChar == s:quotations[a:i]
+    return "\<right>"
+  elseif currentChar =~ '\w' || (lastChar =~ '\w' && currentChar =~ '^\s\?$')
+    return s:quotations[a:i]
   else
-    let w:quot_stack = []
-    call add(w:quot_stack, a:i)
     return s:quotations[a:i] . s:quotations[a:i] . "\<left>"
   endif
 endfunc
 
 function BeginBracket (i)
-  return s:brackets[a:i] . "\<left>"
+  if getline('.')[col('.') - 1] =~ '\w'
+    return s:brackets[a:i][0]
+  else
+    return s:brackets[a:i] . "\<left>"
+  endif
 endfunc
 
 "设置跳出自动补全的括号

@@ -15,6 +15,7 @@ while {[gets $fid line] >= 0} {
 }
 close $fid
 
+puts $pwfile
 set fid [open $pwfile r]
 while {[gets $fid line] >= 0} {
     set ip [lindex $line 0]
