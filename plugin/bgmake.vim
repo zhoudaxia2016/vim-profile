@@ -1,7 +1,7 @@
 " select compiler
-nnoremap <F6> :call SelectCompiler()<cr>
-nnoremap <leader>sc :call SelectCompiler()<cr>
-nnoremap <leader>m :call <SID>make()<cr>
+" nnoremap <F6> :call SelectCompiler()<cr>
+" nnoremap <leader>sc :call SelectCompiler()<cr>
+" nnoremap <leader>m :call <SID>make()<cr>
 
 au BufWritePost * call <SID>make()
 
