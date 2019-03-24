@@ -1,15 +1,15 @@
 " modify vimrc
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+nnoremap <leader>ev :Texplore $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-nnoremap <leader>ep :vsplit ~/.vim/templates/projects<cr>
-nnoremap <leader>et :vsplit ~/.vim/templates/files<cr>
-nnoremap <leader>ee :vsplit ~/.vim/plugin/<cr>
+nnoremap <leader>ep :Texplore ~/.vim/templates/projects<cr>
+nnoremap <leader>et :Texplore ~/.vim/templates/files<cr>
+nnoremap <leader>ee :Texplore ~/.vim/plugin/<cr>
 au Filetype * call FiletypeMap()
 
 function! FiletypeMap ()
   let ft = expand("<amatch>")
-  exe "nnoremap <leader>ek :vsplit ~/.vim/dict/" . ft . ".dict<cr>"
-  exe "nnoremap <leader>ef :vsplit ~/.vim/ftplugin/" . ft . ".vim<cr>"
-  exe "nnoremap <leader>es :vsplit ~/.vim/snippets/" . ft . ".json<cr>"
+  exe "nnoremap <leader>ek :Texplore ~/.vim/dict/" . ft . ".dict<cr>"
+  exe "nnoremap <leader>ef :Texplore ~/.vim/ftplugin/" . ft . ".vim<cr>"
+  exe "nnoremap <leader>es :Texplore ~/.vim/snippets/" . ft . ".json<cr>"
 endfunc

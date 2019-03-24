@@ -9,6 +9,8 @@ function <SID>grep ()
   let fileMsg = split(trim(res), '\s\+')
   let search = input#input("你要搜索的东西是")
   if (search != '')
+    exe "tabnew"
     exe "vim! /" . search . '/ ' . fileMsg[-1] . '/**/*'
+    let g:grepQuickfixList = getqflist()
   endif
 endfunc

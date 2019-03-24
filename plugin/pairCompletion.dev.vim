@@ -35,7 +35,7 @@ function InputQuot (i)
   let lastChar = curline[column - 2]
   if currentChar == s:quotations[a:i]
     return "\<right>"
-  elseif currentChar =~ '\w' || (lastChar =~ '\w' && currentChar =~ '^\s\?$')
+  elseif currentChar =~ '\w' || lastChar =~ '\w'
     return s:quotations[a:i]
   else
     return s:quotations[a:i] . s:quotations[a:i] . "\<left>"

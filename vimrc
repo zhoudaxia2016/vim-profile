@@ -35,5 +35,5 @@ set ttyfast
 autocmd FileType netrw setl bufhidden=delete
 set undofile
 set undodir=/tmp/
-
+set ignorecase
 set cursorline
