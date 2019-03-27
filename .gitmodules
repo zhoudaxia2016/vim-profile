@@ -1,0 +1,3 @@
+[submodule "pack/bundle/start/indentLine"]
+	path = pack/bundle/start/indentLine
+	url = git@github.com:Yggdroot/indentLine.git
