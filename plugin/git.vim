@@ -1,9 +1,11 @@
 nnoremap ,d :silent !git difftool %<cr>
 nnoremap ,l :silent !git log \| vim -R -<cr>:redraw<cr>
 nnoremap ,s :silent !git status \| vim -R -c 'set filetype=gitstatus' -<cr>
-nnoremap ,c :!git commit -a<cr>
-nnoremap ,a :!git add -A && git commit -a<cr>
-nnoremap ,q :!git push<cr>
+
+nnoremap ,g :popup Gitcmd<cr>
+call menu#create('Gitcmd.diff', 'git diff current file', ':silent !git difftool %<cr>', 'n')
+call menu#create('&Gitcmd.&status', 'git status', ':silent !git status \| vim -R -c "set filetype=gitstatus" -<cr>', 'n')
+call menu#create('Gitcmd.log', 'git log', ':silent !git log \| vim -R -<cr>:redraw<cr>', 'n')
 
 au ShellCmdPost * redraw!
 au FileType gitcommit call <SID>afterOpenCommit()
