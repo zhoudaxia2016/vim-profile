@@ -8,7 +8,7 @@ inoremap <c-o> <c-x><c-o>
 inoremap <c-i> <c-x><c-i>
 
 function! CleverTab()
-  if strpart(getline('.'), 0, col('.')-1) =~ '^\s*$'
+  if getline('.')[col('.')-2] =~ '\s'
     return "\<Tab>"
   else
     return "\<C-N>"

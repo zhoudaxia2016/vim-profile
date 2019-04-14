@@ -1,7 +1,7 @@
 function! <SID>Open()
   let options = {'term_name': 'FZF', 'exit_cb': function('s:OpenFile'), 'vertical': 1}
-  echo function('s:OpenFile')
   let b:term_buf = term_start('fzf', options)
+  tmap <F1> :echo 'xxx'<cr>
 endfunction
 
 function s:OpenFile(...)
