@@ -1,6 +1,5 @@
 nnoremap <leader>r :call <SID>replace()<cr>
 nnoremap <leader>f :call <SID>find()<cr>
-nnoremap <cr> :set hls!<cr>
 nnoremap <leader>0 :%s///gn<cr>
 
 function <SID>replace ()
