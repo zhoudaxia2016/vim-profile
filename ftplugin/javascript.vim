@@ -1,6 +1,6 @@
 " compiler
 compiler eslint
-let b:compilers = ['node', 'npm']
+let b:compilers = ['node', 'npm', 'typescript']
 
 " include file search
 let &l:include = 'import\s*\i*\s*from\|import\|require('
