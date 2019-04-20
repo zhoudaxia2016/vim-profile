@@ -8,7 +8,7 @@ au BufWritePost * call <SID>make()
 " quickfix
 nnoremap <expr> cn <SID>jumpNextOrFirstError()
 nnoremap cp :cp<cr>
-nnoremap cf :cf<cr>
+nnoremap cl :cf<cr>
 let b:justAfterCompile = 1
 
 function SelectCompiler ()

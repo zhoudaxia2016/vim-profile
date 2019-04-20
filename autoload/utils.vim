@@ -22,3 +22,21 @@ func utils#readDict (name)
   let lines = readfile(dictDir . a:name . '.dict')
   return join(lines, ' ')
 endfunc
+
+" 使用js-yaml读取yaml配置文件
+func utils#readConfig (fn)
+  let config = system('js-yaml ' . a:fn)
+  try
+    return js_decode(config)
+  catch /.*/
+    echoerr config
+  endtry
+endfunc
+
+" 加载yaml配置文件
+func utils#loadConfig (fn)
+  let config = utils#readConfig(a:fn)
+  for key in keys(config)
+    exe 'let ' . key . ' = ' . 'config["' . key . '"]'
+  endfor
+endfunc
