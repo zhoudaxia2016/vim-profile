@@ -5,7 +5,7 @@ function webdevelop#conf ()
     let rootDir = utils#findRoot(flagFile)
     if rootDir == v:null | return | endif
     let g:path_replacement = {}
-    let g:path_replacement['@'] = rootDir . 'src'
+    let g:path_replacement['@'] = rootDir . '/src'
   endif
   if ft == 'vue' || ft == 'javascript'
     set sua+=.js

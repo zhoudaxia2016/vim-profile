@@ -10,7 +10,7 @@ func utils#findRoot (flagFileOrDir)
   while (c < 10)
     let c += 1
     if file_readable(cur . a:flagFileOrDir) || isdirectory(cur . a:flagFileOrDir)
-      return cur
+      return trim(system('realpath ' . cur))
     endif
     let cur .= '../'
   endwhile

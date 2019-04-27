@@ -16,7 +16,7 @@ let errorformat  .= '%-Q✖%.%#' . ','
 
 let rootDir = utils#findRoot('package.json')
 if rootDir != v:null
-  let cmd = rootDir . 'node_modules/.bin/eslint %'
+  let cmd = rootDir . '/node_modules/.bin/eslint %'
 else
   let cmd = 'eslint %'
 endif
