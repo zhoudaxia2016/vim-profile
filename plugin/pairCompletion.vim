@@ -49,7 +49,8 @@ function InputQuot (i)
 endfunc
 
 function BeginBracket (i)
-  if getline('.')[col('.') - 1] =~ '\S'
+  let char = getline('.')[col('.') - 1]
+  if char =~ '[[:keyword:]]'
     return s:brackets[a:i][0]
   else
     return s:brackets[a:i] . "\<left>"
