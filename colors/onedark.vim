@@ -100,8 +100,8 @@ function! s:h(group, style, ...)
     let l:ctermfg = (has_key(a:highlight, "fg") ? a:highlight.fg.cterm16 : "NONE")
     let l:ctermbg = (has_key(a:highlight, "bg") ? a:highlight.bg.cterm16 : "NONE")
   else
-    let l:ctermfg = (has_key(a:highlight, "fg") ? a:highlight.fg.cterm : "NONE")
-    let l:ctermbg = (has_key(a:highlight, "bg") ? a:highlight.bg.cterm : "NONE")
+    let l:ctermfg = "NONE"
+    let l:ctermbg = "NONE"
   endif
 
   execute "highlight" a:group
