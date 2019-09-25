@@ -37,6 +37,7 @@ set undofile
 set undodir=/tmp/
 set ignorecase
 set cursorline
+set nowritebackup
 set fileencodings=utf-8,chinese,latin-1,gbk,gb18030,gk2312
 " operator mappings
 map <silent>sa <Plug>(operator-surround-append)

@@ -1,0 +1,84 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/resource/github.css"/>
+  </head>
+  <body>
+    <div id="app"><h2 id="">代码分支管理和上线</h2>
+<h3 id="-1">创建分支</h3>
+<ol>
+<li>PC前后端未分离项目</li>
+</ol>
+<p>使用svn进行版本管理。</p>
+<p>启动新的迭代时，基于trunk创建一个开发分支，在该分支下进行开发。</p>
+<ol start="2">
+<li>PC前后端分离项目</li>
+</ol>
+<p>使用git进行版本管理。git分支与后端的svn分支一一对应。</p>
+<p>启动新的迭代时，基于git的trunk分支创建一个和svn分支对应的开发分支。比如管理员1.4开发，svn的分支为branch/admin1.4，</p>
+<p>则创建一个branch/admin1.4的git分支。</p>
+<p>git命令</p>
+<pre><code>git checkout trunk
+git checkout -b branch/admin1.4
+</code></pre>
+<ol start="3">
+<li>App
+使用git进行版本管理。一般App项目每个版本对应一个服务器目录。</li>
+</ol>
+<p>启动新的迭代时，根据后端新拉的目录名创建一个基于最新分支的git分支进行。</p>
+<p>比如家长app2.9，后端新拉了一个1.9目录，我们创建一个基于最新分支1.8的1.9分支。</p>
+<p>git命令</p>
+<pre><code>git checkout 1.8
+git checkout -b 1.9
+</code></pre>
+<ol start="4">
+<li>手机移动端</li>
+</ol>
+<p>使用git进行版本管理。</p>
+<p>启动新的迭代时，基于最新分支创建一个分支进行开发。</p>
+<ol start="5">
+<li>小程序</li>
+</ol>
+<p>使用git进行版本管理。</p>
+<p>启动新的迭代时，基于最新分支创建一个分支进行开发。</p>
+<h3 id="-2">上线前操作</h3>
+<ol>
+<li>PC前后端未分离项目</li>
+</ol>
+<p>提交所有代码到开发分支，然后切换到上线服务器，在trunk分支上合并开发分支。出现冲突则解决冲突再提交trunk分支。</p>
+<p>切换对应的预发布环境测试一遍，没问题后进行上线。</p>
+<ol start="2">
+<li>PC前后端分离项目</li>
+</ol>
+<p>在git的trunk分支上合并分支。出现冲突则解决冲突再提交trunk分支。</p>
+<p>切换对应的预发布环境测试一遍，没问题后进行上线。</p>
+<ol start="3">
+<li>App</li>
+</ol>
+<p>确认提交所有代码后，线下自测一遍，没问题后进行上线。</p>
+<ol start="4">
+<li>手机移动端</li>
+</ol>
+<p>确认提交所有代码后，线下自测一遍，没问题后进行上线。</p>
+<ol start="5">
+<li>小程序</li>
+</ol>
+<p>确认提交所有代码后，使用体验版小程序在线上环境测试一遍，没问题后提交审核。</p>
+<h3 id="-3">上线</h3>
+<p>一般周五不上线，流量高峰期下午不上线，紧急情况除外。</p>
+<ol>
+<li><p>登录<a href="http://ekcps.ekwing.com">http://ekcps.ekwing.com</a></p></li>
+<li><p>点击 代码上线 -&gt; 发起代码上线</p></li>
+<li><p>填写上线详细信息</p>
+<p>部分信息说明：</p>
+<ul>
+<li><strong>邮件标题</strong> 格式 <code>类型: 【模块】详情</code>，fix: 【家长App】xx问题</li>
+<li><strong>收件人地址</strong> 个人公司邮箱和gz-tec@moyi365.com</li></ul></li>
+<li><p>提交。上线完成后还要自测一遍。</p></li>
+</ol></div>
+    <script>
+      setTimeout(() => {
+        document.body.scrollTop = document.body.scrollHeight
+      }, 1000)
+    </script>
+  </body>
+</html>

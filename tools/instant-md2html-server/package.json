@@ -1,0 +1,17 @@
+{
+  "name": "instant-md2html-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-connect": "^5.7.0",
+    "showdown": "^1.9.0"
+  }
+}
