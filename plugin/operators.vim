@@ -21,6 +21,18 @@ func s:init ()
     call operator#new("<tab>e", function('s:execute'))
   endif
   call operator#new("<tab>u", function('s:toggleNameCase'))
+
+  let s:clipCommand = ''
+  let clipCommands = ['clip.exe']
+  for cmd in clipCommands
+    if executable(cmd)
+      let s:clipCommand = cmd
+      break
+    endif
+  endfor
+  if s:clipCommand != ''
+    call operator#new("<tab>y", function('s:sysCopy'))
+  endif
 endfunc
 au FileType * call s:init()
 
@@ -63,4 +75,12 @@ func s:toggleNameCase (type, ...)
   endif
   exe "normal `<v`>c" . join(list, '')
   let @@ = reg_save
+endfunc
+
+" copy to system clipboard
+func s:sysCopy (type, ...)
+  let reg_save = @@
+  exe "normal `[v`]y"
+  let name = @@
+  call system("echo '". name . "' | " . s:clipCommand)
 endfunc
