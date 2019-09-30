@@ -11,7 +11,7 @@ func utils#findRoot (flagFileOrDir)
     let c += 1
     let path = cur . a:flagFileOrDir
     if file_readable(path) || isdirectory(path)
-      return trim(system('realpath ' . path))
+      return trim(system('realpath ' . (cur == '' ? '.' : cur)))
     endif
     let cur .= '../'
   endwhile

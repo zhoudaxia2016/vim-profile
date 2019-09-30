@@ -15,11 +15,7 @@ function! <SID>Open()
   let files = map(b:output, 'split(v:val)[-3] . " " . split(v:val)[0]')
   let files = join(b:output, '\n')
   let options = {'cwd': root, 'term_name': 'FZF', 'exit_cb': function('s:OpenBuffer', [root, origin_path]), 'vertical': 1, 'env': { 'FZF_DEFAULT_COMMAND': 'echo "' . files . '"' } }
-  try 
-    let b:term_buf = term_start("fzf", options)
-  catch /.*/
-    echom 'errrrr'
-  endtry
+  let b:term_buf = term_start("fzf", options)
 endfunction
 
 function s:OpenBuffer(...)
