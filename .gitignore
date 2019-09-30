@@ -1,3 +1,4 @@
 .netrwhist
 config
+tools/instant-md2html-server/static/index.html
 **/node_modules
