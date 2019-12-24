@@ -28,7 +28,11 @@ endfunc
 func utils#readConfig (fn)
   let config = system('js-yaml ' . a:fn)
   try
-    return js_decode(config)
+    if has('nvim')
+      return json_decode(config)
+    else
+      return js_decode(config)
+    endif
   catch /.*/
     echoerr config
   endtry

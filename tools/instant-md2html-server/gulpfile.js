@@ -1,7 +1,7 @@
 const fs = require('fs')
 const showdown = require('showdown')
 
-const converter = new showdown.Converter()
+const converter = new showdown.Converter({ tasklists: true })
 const gulp = require('gulp')
 const connect = require('gulp-connect')
 

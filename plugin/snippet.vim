@@ -6,7 +6,7 @@ function <SID>generateSnippet ()
   endif
   let ft = expand("<amatch>")
   let fn = $HOME . '/.vim/snippets/' . ft . '.json'
-  if (file_readable(fn))
+  if (filereadable(fn))
     let json = json#readfile(fn)
     call snippet#generateSnippet(json.items, json.models)
   endif
@@ -14,9 +14,9 @@ function <SID>generateSnippet ()
   if type(get(b:moreSnippets, ft)) == v:t_list
     for ft in get(b:moreSnippets, ft)
       let fn = $HOME . '/.vim/snippets/' . ft . '.json'
-      if (file_readable(fn))
-  let json = json#readfile(fn)
-  call snippet#generateSnippet(json.items, json.models)
+      if (filereadable(fn))
+        let json = json#readfile(fn)
+        call snippet#generateSnippet(json.items, json.models)
       endif
     endfor
   endif

@@ -22,17 +22,12 @@ func s:init ()
   endif
   call operator#new("<tab>u", function('s:toggleNameCase'))
 
-  let s:clipCommand = ''
-  let clipCommands = ['clip.exe']
-  for cmd in clipCommands
-    if executable(cmd)
-      let s:clipCommand = cmd
-      break
-    endif
-  endfor
+  let s:clipCommand = 'powershell.exe Set-Clipboard'
   if s:clipCommand != ''
     call operator#new("<tab>y", function('s:sysCopy'))
   endif
+
+  call operator#new("<tab>f", function('s:findWord'))
 endfunc
 au FileType * call s:init()
 
@@ -82,5 +77,13 @@ func s:sysCopy (type, ...)
   let reg_save = @@
   exe "normal `[v`]y"
   let name = @@
-  call system("echo '". name . "' | " . s:clipCommand)
+  call system(s:clipCommand . " " . name)
+endfunc
+
+" find word
+func s:findWord (type, ...)
+  let reg_save = @@
+  exe "normal `[v`]y"
+  let word = @@
+  call find#findWord(word)
 endfunc
