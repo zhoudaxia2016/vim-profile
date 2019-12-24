@@ -17,7 +17,8 @@ function <SID>openHelpFile ()
 endfunction
 
 function <SID>clip ()
-  silent %w !clip.exe
+  %w silent !clip.exe
+  call feedkeys("\<cr>")
 endfunc
 
 " move around window
