@@ -15,6 +15,9 @@ set expandtab
 set noswapfile
 let mapleader=" "
 set backspace=indent,eol,start
+set foldmethod=indent
+set foldlevel=3
+set foldopen+=jump
 
 colors snazzy
 set list listchars=trail:_
@@ -22,9 +25,6 @@ set list listchars=trail:_
 if (empty($TMUX))
   if (has("nvim"))
     let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  if (has("termguicolors"))
-    set termguicolors
   endif
 endif
 set lazyredraw
