@@ -1,1 +1,1 @@
-nnoremap <leader>j :%!jq '.'<cr>
+nnoremap <buffer> <leader>j :%!jq '.'<cr>
