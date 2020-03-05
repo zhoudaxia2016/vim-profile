@@ -10,4 +10,5 @@ else
   endif
 endif
 
-let &l:makeprg = '/home/zhou/.app/node/bin/tsc %'
+let &l:makeprg = '/home/zhou/.local/node/bin/tsc %'
+let &l:errorformat = '%+A\ %#%f\ %#(%l\\\,%c):\ %m,%C%m'
