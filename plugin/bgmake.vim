@@ -1,9 +1,10 @@
 " select compiler
 " nnoremap <F6> :call SelectCompiler()<cr>
 " nnoremap <leader>sc :call SelectCompiler()<cr>
-" nnoremap <leader>m :call <SID>make()<cr>
+ nnoremap <leader>w :call <SID>make()<cr>
 
 au BufWritePost * call <SID>make()
+autocmd BufNew * if &previewwindow | wincmd L | endif
 
 " quickfix
 nnoremap <expr> cn <SID>jumpNextOrFirstError()
@@ -23,11 +24,16 @@ func MakeExitHandler (channel, msg)
   exe "cg " . b:tmpfile
   let qflist = getqflist()
   let num = len(qflist)
+  if (&filetype == 'typescript')
+    exec "pedit " . expand('%:r') . '.js'
+  endif
   if (num == 0)
     echo "Good job! No error exists."
+    cclose
   else
     echohl ErrorMsg
     echo num . " error(s) need you to fix!"
+    copen
     echohl None
   endif
 endfunc
