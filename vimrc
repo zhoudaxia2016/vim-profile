@@ -18,6 +18,8 @@ set backspace=indent,eol,start
 set foldmethod=indent
 set foldlevel=3
 set foldopen+=jump
+set shortmess-=S
+set ffs=unix,dos
 
 colors snazzy
 set list listchars=trail:_
