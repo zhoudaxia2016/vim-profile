@@ -10,6 +10,7 @@ function RemoteOutHandler (ch, msg)
 endfunc
 
 function RemoteErrHandler (ch, msg)
+  echom "e sftp://" . b:host . "/" . b:path
   echom "RemoteEdit Error: " . a:msg
 endfunc
 

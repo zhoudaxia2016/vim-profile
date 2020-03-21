@@ -7,6 +7,7 @@ function! <SID>translate ()
   endfunc
   function! s:close (c) closure
     call map(result, 'trim(v:val)')
+    echo result[1:]
     call popup_atcursor(result[1:], { 'padding': [1, 2, 0, 2], 'borderchars': ['-', '|', '-', '|'], 'border': [1] })
   endfunc
   call job_start('dict ' . @0, { 'callback': funcref('s:callback'), 'close_cb': funcref('s:close') })

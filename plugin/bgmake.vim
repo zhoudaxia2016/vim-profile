@@ -2,8 +2,9 @@
 " nnoremap <F6> :call SelectCompiler()<cr>
 " nnoremap <leader>sc :call SelectCompiler()<cr>
  nnoremap <leader>w :call <SID>make()<cr>
+ "compiler jenkins
 
-au BufWritePost * call <SID>make()
+"au BufWritePost * call <SID>make()
 autocmd BufNew * if &previewwindow | wincmd L | endif
 
 " quickfix
