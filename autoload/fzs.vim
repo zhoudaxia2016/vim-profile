@@ -50,7 +50,6 @@ function fzs#run(opts)
   if hasActions
     let fullCmd .= ' --expect "' . join(keys(actions), ',') . '"'
   endif
-  echom fullCmd
   let fzs.buf = term_start(['sh', '-c', fullCmd], termOpts)
   let fzs.win = popup_create(fzs.buf, #{minheight: 20, minwidth:100})
 endfunc

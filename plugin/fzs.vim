@@ -1,13 +1,5 @@
-function <SID>execute(cmd)
-  let list = split(a:cmd, '\s\+')
-  if len(list) >= 1
-    exec list[1]
-  endif
-endfunc
-
 function <SID>editFIle(root, key, path)
   let path = a:root . '/' . a:path
-  echom path
   if filereadable(path)
     if a:key == 1
       exe 'tabnew ' . path
@@ -26,9 +18,26 @@ function! <SID>startSearchFile()
   if root == v:null
     let root = '.'
   endif
-  echom root
   call fzs#run(#{cb: function('<SID>editFIle', [root, 0]), actions: #{ctrl-t: function('<SID>editFIle', [root, 1])}, termOpts: #{cwd: root}, preview: 'cat {}'})
 endfunc
 
-nnoremap <leader>p1 :call fzs#run(#{cmd: 'command', isVimCmd: 1, cb: function('<SID>execute')})<cr>
-nnoremap <leader>p2 :call <SID>startSearchFile()<cr>
+function! <SID>switchBuffer(param)
+  let param = split(a:param)
+  if len(param) == 0
+    return
+  endif
+  let num = param[0]
+  let winid = win_findbuf(num)
+  if len(winid) == 0
+    exe 'vertical sbuffer ' . num
+    return
+  endif
+  let tabwin = win_id2tabwin(winid[0])
+  if tabwin[0] != 0 || tabwin[1] != 0
+    exe 'tabn ' . tabwin[0]
+    exe 'sbuffer ' . num
+  endif
+endfunc
+
+nnoremap <leader>p1 :call <SID>startSearchFile()<cr>
+nnoremap <leader>p2 :call fzs#run(#{cmd: 'ls', isVimCmd: 1, cb: function('<SID>switchBuffer')})<cr>
