@@ -3,6 +3,8 @@ function fzs#run(opts)
   let isVimCmd = get(a:opts, 'isVimCmd', 0)
   let preview = get(a:opts, 'preview', '')
   let termOpts = get(a:opts, 'termOpts', {})
+  let fzfOpts = get(a:opts, 'fzfOpts', '')
+  let setRoot = get(a:opts, 'setRoot', 0)
   let actions = get(a:opts, 'actions', v:null)
   let hasActions = type(actions) == type({})
   let fzs = #{ buf: '', win: '', cb: get(a:opts, 'cb') }
@@ -30,9 +32,17 @@ function fzs#run(opts)
     call term_wait(fzs.buf, 5000)
     call popup_close(fzs.win)
     if hasActions && key != '' 
-      call actions[key](result)
+      if setRoot
+        call actions[key](termOpts.cwd, result)
+      else
+        call actions[key](result)
+      endif
     else
-      call fzs.cb(result)
+      if setRoot
+        call fzs.cb(termOpts.cwd, result)
+      else
+        call fzs.cb(result)
+      endif
     endif
   endfunc
 
@@ -49,6 +59,20 @@ function fzs#run(opts)
   endif
   if hasActions
     let fullCmd .= ' --expect "' . join(keys(actions), ',') . '"'
+  endif
+  if fzfOpts != ''
+    let fullCmd .= ' ' . fzfOpts
+  endif
+  if setRoot
+    let root = utils#findRoot('.git')
+    let origin_path = getcwd()
+    if root == v:null
+      let root = utils#findRoot('package.json')
+    endif
+    if root == v:null
+      let root = '.'
+    endif
+    let termOpts.cwd = root
   endif
   let fzs.buf = term_start(['sh', '-c', fullCmd], termOpts)
   let fzs.win = popup_create(fzs.buf, #{minheight: 20, minwidth:100})
