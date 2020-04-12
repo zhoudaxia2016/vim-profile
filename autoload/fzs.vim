@@ -9,12 +9,28 @@ function fzs#run(opts)
   let hasActions = type(actions) == type({})
   let fzs = #{ buf: '', win: '', cb: get(a:opts, 'cb') }
 
+  if setRoot
+    let root = utils#findRoot('.git')
+    if root == v:null
+      let root = utils#findRoot('package.json')
+    endif
+    if root == v:null
+      let root = '.'
+    endif
+    let fzs.cwd = root
+    let termOpts.cwd = root
+  endif
+
   if cmd != ''
     redir => output
     if isVimCmd
       exec 'silent ' . cmd
     else
-      exec 'silent echo system("' . cmd . '")'
+      if setRoot
+        exec 'silent echo system("cd ' . fzs.cwd . ';' . cmd . '")'
+      else
+        exec 'silent echo system("' . cmd . '")'
+      endif
     endif
     redir END
     let output = split(output, '\n')
@@ -33,13 +49,13 @@ function fzs#run(opts)
     call popup_close(fzs.win)
     if hasActions && key != '' 
       if setRoot
-        call actions[key](termOpts.cwd, result)
+        call actions[key](fzs.cwd, result)
       else
         call actions[key](result)
       endif
     else
       if setRoot
-        call fzs.cb(termOpts.cwd, result)
+        call fzs.cb(fzs.cwd, result)
       else
         call fzs.cb(result)
       endif
@@ -62,17 +78,6 @@ function fzs#run(opts)
   endif
   if fzfOpts != ''
     let fullCmd .= ' ' . fzfOpts
-  endif
-  if setRoot
-    let root = utils#findRoot('.git')
-    let origin_path = getcwd()
-    if root == v:null
-      let root = utils#findRoot('package.json')
-    endif
-    if root == v:null
-      let root = '.'
-    endif
-    let termOpts.cwd = root
   endif
   let fzs.buf = term_start(['sh', '-c', fullCmd], termOpts)
   let fzs.win = popup_create(fzs.buf, #{minheight: 20, minwidth:100})
