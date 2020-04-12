@@ -40,6 +40,6 @@ function! <SID>agSearch(root, param)
   exe 'normal ' . params[1] . 'gg'
 endfunc
 
-nnoremap <leader>p1 :call fzs#run(#{cb: function('<SID>editFIle', [0]), actions: #{ctrl-t: function('<SID>editFIle', [1])}, preview: 'cat {}', setRoot: 1})<cr>
-nnoremap <leader>p2 :call fzs#run(#{cmd: 'ls', isVimCmd: 1, cb: function('<SID>switchBuffer')})<cr>
-nnoremap <leader>p3 :call fzs#run(#{cmd: 'ag --nobreak --noheading .', setRoot: 1, cb: function('<SID>agSearch'), fzfOpts: '-0 -1 --delimiter : --nth 3'})<cr>
+nnoremap <leader>pf :call fzs#run(#{cb: function('<SID>editFIle', [0]), actions: #{ctrl-t: function('<SID>editFIle', [1])}, preview: 'cat {}', setRoot: 1})<cr>
+nnoremap <leader>pb :call fzs#run(#{cmd: 'ls', isVimCmd: 1, cb: function('<SID>switchBuffer')})<cr>
+nnoremap <leader>pa :call fzs#run(#{cmd: 'ag --noheading .', setRoot: 1, cb: function('<SID>agSearch'), fzfOpts: '-0 -1 --delimiter : --nth 3..'})<cr>
