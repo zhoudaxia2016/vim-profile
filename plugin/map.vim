@@ -45,3 +45,4 @@ nnoremap <leader>5 5gt
 nnoremap <cr> :set hlsearch!<cr>
 set hlsearch
 nnoremap vA ggVG
+nnoremap <c-e> <c-v>
