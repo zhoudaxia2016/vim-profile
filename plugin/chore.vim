@@ -1,1 +1,1 @@
-cnoremap <expr> <Tab>  getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<C-f>a<C-n>" : '<Tab>'
+" cnoremap <expr> <Tab>  getcmdtype() == "/" \|\| getcmdtype() == "?" ? "<C-f>a<C-n>" : '<Tab>'
