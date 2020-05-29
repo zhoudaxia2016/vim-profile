@@ -40,6 +40,12 @@ function! <SID>agSearch(root, param)
   exe 'normal ' . params[1] . 'gg'
 endfunc
 
+function! <SID>jumpLine(param)
+  let param = split(a:param)
+  exe 'normal ' . param[0] . 'gg'
+endfunc
+
 nnoremap <leader>pf :call fzs#run(#{cb: function('<SID>editFIle', [0]), actions: #{ctrl-t: function('<SID>editFIle', [1])}, preview: 'cat {}', setRoot: 1})<cr>
 nnoremap <leader>pb :call fzs#run(#{cmd: 'ls', isVimCmd: 1, cb: function('<SID>switchBuffer')})<cr>
 nnoremap <leader>pa :call fzs#run(#{cmd: 'ag --noheading .', setRoot: 1, cb: function('<SID>agSearch'), fzfOpts: '-0 -1 --delimiter : --nth 3..'})<cr>
+nnoremap <leader>wl :call fzs#run(#{cmd: 'cat -n ' . expand('%:p'), cb: function('<SID>jumpLine')})<cr>
