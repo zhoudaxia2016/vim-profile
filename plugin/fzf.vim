@@ -9,7 +9,7 @@ function! <SID>Open()
     let root = '.'
   endif
   echom 3
-  let options = {'cwd': root, 'term_name': 'FZF', 'exit_cb': function('s:OpenFile', [root, origin_path]), 'vertical': 1}
+  let options = {'cwd': root, 'term_name': 'FZF', 'exit_cb': function('s:OpenFile', [root, origin_path]), 'vertical': 0}
   let b:term_buf = term_start('fzf', options)
   echom 4
 endfunction
@@ -26,4 +26,3 @@ function s:OpenFile(...)
 endfunction
 
 nnoremap <expr> <c-p> <SID>Open()
-hi Terminal guibg=#3c4151 guifg=#dfe2e2

@@ -205,3 +205,14 @@ if g:SnazzyTransparent == 1
     highlight  SignifyLineDelete   guibg=NONE   ctermbg=NONE
     highlight  SignifyLineChange   guibg=NONE   ctermbg=NONE
 endif
+
+hi Terminal guibg=#282a36
+let g:terminal_ansi_colors = repeat(['#ffffff'], 16)
+let g:terminal_ansi_colors[0] = '#f1fa8c'
+let g:terminal_ansi_colors[1] = '#ff79c6'
+let g:terminal_ansi_colors[2] = '#bd93f9'
+let g:terminal_ansi_colors[3] = '#ffb86c'
+let g:terminal_ansi_colors[4] = '#8be9fd'
+let g:terminal_ansi_colors[5] = '#44475a'
+let g:terminal_ansi_colors[6] = '#ff5555'
+let g:terminal_ansi_colors[7] = '#6272a4'
