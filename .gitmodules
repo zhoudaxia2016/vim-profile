@@ -1,6 +1,3 @@
 [submodule "pack/bundle/start/indentLine"]
 	path = pack/bundle/start/indentLine
 	url = git@github.com:Yggdroot/indentLine.git
-[submodule "pack/bundle/start/onedark.vim"]
-	path = pack/bundle/start/onedark.vim
-	url = git@github.com:joshdick/onedark.vim.git
