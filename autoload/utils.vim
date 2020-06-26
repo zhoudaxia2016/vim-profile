@@ -45,3 +45,20 @@ func utils#loadConfig (fn)
     exe 'let ' . key . ' = ' . 'config["' . key . '"]'
   endfor
 endfunc
+
+func utils#debounce(fn)
+  let timer = v:null
+  let funs = {}
+  let funs.fn = a:fn
+  function funs.wrapperFunc(...) closure
+    let funs.callFn = function(funs.fn, a:000[:-2])
+    call funs.callFn()
+  endfunc
+  function funs.returnFunc(...) closure
+    if timer != v:null
+      call timer_stop(timer)
+    endif
+    let timer = timer_start(200, function(funs.wrapperFunc, a:000))
+  endfunc
+  return funs.returnFunc
+endfunc
