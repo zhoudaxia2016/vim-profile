@@ -47,3 +47,7 @@ map <silent>sd <Plug>(operator-surround-delete)
 map <silent>sr <Plug>(operator-surround-replace)
 
 let g:netrw_use_noswf= 0
+
+if &diff
+  set noreadonly
+endif
