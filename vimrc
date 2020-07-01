@@ -41,12 +41,18 @@ set ignorecase
 set cursorline
 set nowritebackup
 set fileencodings=utf-8,chinese,latin-1,gbk,gb18030,gk2312
-" operator mappings
-map <silent>sa <Plug>(operator-surround-append)
-map <silent>sd <Plug>(operator-surround-delete)
-map <silent>sr <Plug>(operator-surround-replace)
 
 let g:netrw_use_noswf= 0
+source $VIMRUNTIME/menu.vim
+set wildmenu                                                                                                                                                     
+set cpo-=<
+set wcm=<C-Z>
+map <F3> :emenu <C-Z>
+menu A.&a :echo "abc"<cr>
+menu A.&b :echo "def"<cr>
+
+hi Pmenu guibg=#21252B guifg=#CCCCCC
+hi PmenuSel guibg=#91BC77 guifg=#282C34
 
 if &diff
   set noreadonly
