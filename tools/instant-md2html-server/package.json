@@ -12,6 +12,6 @@
   "dependencies": {
     "gulp": "^4.0.2",
     "gulp-connect": "^5.7.0",
-    "showdown": "^1.9.0"
+    "showdown": "^1.9.1"
   }
 }
