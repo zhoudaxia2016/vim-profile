@@ -20,6 +20,7 @@ set foldlevel=3
 set foldopen+=jump
 set shortmess-=S
 set ffs=unix,dos
+set hidden
 
 colors snazzy
 set list listchars=trail:_
@@ -57,3 +58,5 @@ hi PmenuSel guibg=#91BC77 guifg=#282C34
 if &diff
   set noreadonly
 endif
+
+let g:netrw_browsex_viewer="cmd.exe /C start"
