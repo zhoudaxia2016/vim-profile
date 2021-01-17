@@ -105,3 +105,21 @@
 - [x] 打开与编辑都需要输入密码 `配置ssh的ControlMaster属性,每次打开远程文件或者目录时建立一个ssh的socket链接`
 - [ ] 保存文件后字符错乱，需要跳转到底部刷新界面
 - [ ] 错误会生成错误信息在目录上
+
+## submodule管理插件
+
+### 更新插件
+```
+git submodule update --remote  
+```
+
+### 删除插件
+```
+git rm --cached submodulepath
+#Delete the relevant lines from the .gitmodules file.
+#Delete the relevant section from .git/config.
+git add .gitmodules
+git commit -m "commitmsg"
+rm -rf submodulepath
+rm -rf .git/modules/submodulepath
+```
