@@ -1,3 +1,6 @@
+vim9script
 setlocal omnifunc=vuecomplete#CompleteVUE
 compiler eslint
-call webdevelop#conf()
+
+import { WebdevelopInit } from '../autoload/webdevelop.vim'
+WebdevelopInit()
