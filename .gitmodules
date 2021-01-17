@@ -4,6 +4,3 @@
 [submodule "pack/bundle/start/typescript-vim"]
 	path = pack/bundle/start/typescript-vim
 	url = git@github.com:leafgarland/typescript-vim.git
-[submodule "pack/bundle/start/undotree"]
-	path = pack/bundle/start/undotree
-	url = git@github.com:mbbill/undotree.git
