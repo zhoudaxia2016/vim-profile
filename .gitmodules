@@ -4,3 +4,6 @@
 [submodule "pack/bundle/start/typescript-vim"]
 	path = pack/bundle/start/typescript-vim
 	url = git@github.com:leafgarland/typescript-vim.git
+[submodule "pack/bundle/start/AnsiEsc"]
+	path = pack/bundle/start/AnsiEsc
+	url = git@github.com:vim-scripts/AnsiEsc.vim.git
