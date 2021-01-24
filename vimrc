@@ -22,7 +22,8 @@ set shortmess-=S
 set ffs=unix,dos
 set hidden
 
-colors snazzy
+"colors nord
+colors nord
 set list listchars=trail:_
 
 if (empty($TMUX))
@@ -61,3 +62,4 @@ endif
 
 let g:netrw_browsex_viewer="cmd.exe /C start"
 let html_no_rendering = 1
+let g:vim_json_conceal = 0
