@@ -7,3 +7,6 @@
 [submodule "pack/bundle/start/AnsiEsc"]
 	path = pack/bundle/start/AnsiEsc
 	url = git@github.com:vim-scripts/AnsiEsc.vim.git
+[submodule "pack/bundle/start/nord-vim"]
+	path = pack/bundle/start/nord-vim
+	url = git@github.com:arcticicestudio/nord-vim.git
