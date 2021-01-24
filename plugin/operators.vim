@@ -9,12 +9,6 @@ func s:init ()
   let filetype_exclude = ['netrw', 'help']
 
   " comment operator
-  if match(filetype_exclude, ft) != 0
-    let config = utils#readConfig(expand('$HOME/.vim/yamls/comment-operator.yaml'))
-    let comment_str = get(config, expand('<amatch>'), '//')
-    let b:comment_str = substitute(comment_str, '/', '\\/', 'g')
-    call operator#new("<tab>m", function('s:comment'))
-  endif
   
   " execute operator
   if match(['netrw'], ft) != 0
