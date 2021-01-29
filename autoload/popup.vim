@@ -15,7 +15,9 @@ function popup#menu(options)
 endfunc
 
 function s:popup_menu_callback(actions, id, n)
-  call a:actions[a:n - 1]()
+  if a:n !=  -1
+    call a:actions[a:n - 1]()
+  endif
 endfunc
 
 function s:popup_menu_filter_fn(id, key)
