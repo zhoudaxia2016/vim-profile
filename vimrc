@@ -50,8 +50,6 @@ set wildmenu
 set cpo-=<
 set wcm=<C-Z>
 map <F3> :emenu <C-Z>
-menu A.&a :echo "abc"<cr>
-menu A.&b :echo "def"<cr>
 
 hi Pmenu guibg=#21252B guifg=#CCCCCC
 hi PmenuSel guibg=#91BC77 guifg=#282C34
@@ -62,4 +60,9 @@ endif
 
 let g:netrw_browsex_viewer="cmd.exe /C start"
 let html_no_rendering = 1
-let g:vim_json_conceal = 0
+let g:vim_json_conceal=0
+au VimEnter * if &diff | execute 'windo set wrap' | endif
+
+hi TabLineFill ctermfg=2 ctermbg=0
+hi TabLine ctermfg=2 ctermbg=0
+hi TabLineSel term=bold ctermfg=0 ctermbg=2
