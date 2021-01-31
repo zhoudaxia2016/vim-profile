@@ -1,9 +1,6 @@
 function ShowFileFormatFlag()
   return '[' . &fileformat . ']'
 endfunction
-function ShowIsPaste()
-  return &paste ? '﵂' : ''
-endfunction
 let s:modes = #{ i: 'Insert', n: 'Normal' }
 function ShowMode()
   let m = mode()
@@ -14,5 +11,5 @@ function ShowMode()
 endfunction
 
 set laststatus=2
-set statusline=\ %{ShowIsPaste()}%f\ --%{ShowMode()}--\ \ %y\%{ShowFileFormatFlag()}\ \ line:%l\ \ col:%c%=
+set statusline=\ --%{ShowMode()}--\ \ %y\%{ShowFileFormatFlag()}\ \ line:%l\ \ col:%c%=
 set statusline+=%<%L\ %F\ %p%%\ 
