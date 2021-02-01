@@ -11,6 +11,8 @@ function s:copy()
   call system('clip.exe', substitute(@0, '\n$', '', ''))
 endfunc
 
+inoremap <c-y> <c-r>=trim(system('powershell.exe Get-Clipboard'))<cr>
+
 " 运行当前文件
 let s:runCommands = #{javascript: '!node %', vim: 'source %'}
 function s:runCode()
@@ -36,3 +38,10 @@ call add(popup_commonMenus, #{text: '转换unicode成中文', action: function('
 call add(popup_commonMenus, #{text: '格式化', action: function('s:format')})
 
 nnoremap <silent> <leader>o :call popup#menu(popup_commonMenus)<cr>
+
+function s:search(str)
+  exec 'normal /' . a:str . "\<cr>"
+endfunc
+let popup_searchMenus = []
+call add(popup_searchMenus, #{text: 'End of next attribute', action: function('s:search', ['"[^"]\+"/e'])})
+nnoremap <silent> <leader>p :call popup#menu(popup_searchMenus)<cr>
