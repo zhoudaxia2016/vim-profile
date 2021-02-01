@@ -11,17 +11,6 @@ func s:init ()
   " comment operator
   
   " execute operator
-  if match(['netrw'], ft) != 0
-    call operator#new("<tab>e", function('s:execute'))
-  endif
-  call operator#new("<tab>u", function('s:toggleNameCase'))
-
-  let s:clipCommand = 'powershell.exe Set-Clipboard'
-  if s:clipCommand != ''
-    call operator#new("<tab>y", function('s:sysCopy'))
-  endif
-
-  call operator#new("<tab>f", function('s:findWord'))
 endfunc
 au FileType * call s:init()
 

@@ -35,11 +35,25 @@ function <SID>openOldFile()
   endif
 endfunc
 
+function <SID>echo(output)
+  for line in a:output
+    echo line
+  endfor
+endfunc
+
+function <SID>more()
+  let cmd = input('Input a vim command> ')
+  if cmd != ''
+    call tmux#window(#{ cmd: 'fzf -e', output: 1, callback: function('<SID>echo'), root: 0, input: cmd })
+  endif
+endfunc
+
 nnoremap <c-p>f :call tmux#window(#{ cmd: '_frg', output: 1, callback: function('<SID>frgCb') })<cr>
 nnoremap <c-p>F :call tmux#window(#{ cmd: '_frg', output: 1, callback: function('<SID>frgCb'), root: 0 })<cr>
 nnoremap <c-p>p :call tmux#window(#{ cmd: '_fe', output: 1, callback: function('<SID>fzfCb') })<cr>
 nnoremap <c-p>P :call tmux#window(#{ cmd: '_fe', output: 1, callback: function('<SID>fzfCb'), root: 0 })<cr>
 nnoremap <c-p>d :call tmux#window(#{ cmd: 'cat -n ' . expand('%:p') . " \| fzf", output: 1, callback: function('<SID>searchCurrentFileCb'), root: 0 })<cr>
 nnoremap <c-b> :call tmux#window(#{ cmd: 'fzf', output: 1, callback: function('<SID>searchBufferCb'), root: 0, input: 'ls' })<cr>
+nnoremap <c-m> :call <SID>more()<cr>
 
 au VimEnter * call <SID>openOldFile()
