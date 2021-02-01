@@ -13,6 +13,7 @@ function <SID>setDict ()
   endif
 endfunc
 
+
 let b:moreDicts = {
   \ "vue": ['javascript', 'css'],
   \ "html": ['javascript', 'css'],
