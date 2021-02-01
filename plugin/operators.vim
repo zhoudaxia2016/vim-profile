@@ -9,8 +9,20 @@ func s:init ()
   let filetype_exclude = ['netrw', 'help']
 
   " comment operator
+  if match(filetype_exclude, ft) != 0
+    let config = utils#readConfig(expand('$HOME/.vim/yamls/comment-operator.yaml'))
+    let comment_str = get(config, expand('<amatch>'), '//')
+    let b:comment_str = substitute(comment_str, '/', '\\/', 'g')
+    call operator#new("<tab>m", function('s:comment'))
+  endif
   
   " execute operator
+  if match(['netrw'], ft) != 0
+    call operator#new("<tab>e", function('s:execute'))
+  endif
+  call operator#new("<tab>u", function('s:toggleNameCase'))
+
+  call operator#new("<tab>y", function('s:sysCopy'))
 endfunc
 au FileType * call s:init()
 
@@ -58,15 +70,8 @@ endfunc
 " copy to system clipboard
 func s:sysCopy (type, ...)
   let reg_save = @@
-  exe "normal `[v`]y"
-  let name = @@
-  call system(s:clipCommand . " " . name)
+  exe "normal '[v']y"
+  call system('clip.exe', substitute(@@, '\n$', '', ''))
 endfunc
 
-" find word
-func s:findWord (type, ...)
-  let reg_save = @@
-  exe "normal `[v`]y"
-  let word = @@
-  call find#findWord(word)
-endfunc
+nnoremap <tab>i <c-i>
