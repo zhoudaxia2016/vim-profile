@@ -45,3 +45,5 @@ endfunc
 let popup_searchMenus = []
 call add(popup_searchMenus, #{text: 'End of next attribute', action: function('s:search', ['"[^"]\+"/e'])})
 nnoremap <silent> <leader>p :call popup#menu(popup_searchMenus)<cr>
+
+inoremap <c-y> <c-r>=trim(system('win32yank.exe -o'))<cr>
