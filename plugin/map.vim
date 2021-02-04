@@ -42,7 +42,6 @@ nnoremap <leader>2 2gt
 nnoremap <leader>3 3gt
 nnoremap <leader>4 4gt
 nnoremap <leader>5 5gt
-set hlsearch
 nnoremap vA ggVG
 nnoremap <c-e> <c-v>
 nnoremap <c-z> :sh<cr>
