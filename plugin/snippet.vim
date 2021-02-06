@@ -4,6 +4,11 @@ const snippetPlaceholderPattern = '\${[^}]\+}'
 const propPlaceholder = 'snippet-placeholder'
 const propPlaceholderColor = '#e9c496'
 var isSnippetJump = 0
+var id = 0
+def SnippetGuid(): number
+  id = id + 1
+  return id
+enddef
 
 def LoadSnippet()
   if exists('g:loadSnippetPlugin')
@@ -44,14 +49,15 @@ def g:ExpandSnippet():string
     append('.', lines)
     normal dd
     AddSnippetJumpList(snippet)
-    id = 0
-    return g:JumpSnippet()
+    placeholderIndex = 0
+    return g:JumpSnippet(snippet)
   endif
   return ''
 enddef
 
 def GenerateSnippetInfo(snippet: list<string>): list<any>
   const pat = '\${\(\d\+\)\(:\([^}]\+\)\)\?}'
+  const patVar = '\$\(\d\+\)'
   var info = {}
   var lines = []
   var lineIndex = 0
@@ -62,42 +68,93 @@ def GenerateSnippetInfo(snippet: list<string>): list<any>
         break
       endif
       var m = matchlist(_[0], pat)
-      var _id = m[1]
+      var i = m[1]
       var default = m[3] == '' ? '_' : m[3]
-      info[_id] = {
+      info[i] = {
         line: lineIndex,
         startCol: _[1],
-        default: default
+        default: default,
+        id: SnippetGuid()
       }
       line = substitute(line, _[0], default, '')
     endwhile
     lineIndex += 1
     add(lines, line)
   endfor
+  lineIndex = 0
+  for line in lines
+    var start = 0
+    while 1
+      var _ = matchstrpos(line, patVar, start)
+      if (_[0] == '')
+        break
+      endif
+      var m = matchlist(_[0], patVar)
+      var placeholder = get(info, m[1], {})
+      if !empty(placeholder)
+        if !has_key(placeholder, 'variable')
+          placeholder.variable = []
+        endif
+        add(placeholder.variable, { line: lineIndex, startCol: _[1], length: len(_[0]), id: SnippetGuid() })
+      endif
+      start = _[2]
+    endwhile
+    lineIndex += 1
+  endfor
+
   return [lines, info]
 enddef
 
 def AddSnippetJumpList(snippet: dict<any>)
   var currentLine = line('.')
   var i = 0
-  var ids = keys(snippet)
-  var placeholderCount = len(ids)
-  for key in ids
+  var placeholders = keys(snippet)
+  var placeholderCount = len(placeholders)
+  for key in placeholders
     var value = snippet[key]
-    prop_add(currentLine + value.line, value.startCol + 1, { type: propPlaceholder, length: len(value.default), id: str2nr(key) })
+    prop_add(currentLine + value.line, value.startCol + 1, { type: propPlaceholder, length: len(value.default), id: value.id })
+    if has_key(value, 'variable')
+      for v in value.variable
+        prop_add(currentLine + v.line, v.startCol + 1, { type: propPlaceholder, length: v.length, id: v.id })
+      endfor
+    endif
   endfor
   g:snippet_save_map = maparg('<tab>', 'i', 0, 1)
   if placeholderCount != 0
     g:snippetPlaceholderCount = placeholderCount
-    inoremap <tab> <c-r>=JumpSnippet()<cr>
+    g:snippet = snippet
+    inoremap <tab> <c-r>=JumpSnippet(snippet)<cr>
   endif
 enddef
 
-var id = 0
-def g:JumpSnippet(): string
-  var prop = prop_find({ type: propPlaceholder, id: id, skipstart: 1 }, 'f')
+var placeholderIndex = 0
+def SnippetReplaceVariable()
+  var snippet = g:snippet
+  if placeholderIndex != 1
+    var lastValue = snippet[placeholderIndex - 1]
+    if has_key(lastValue, 'variable')
+      for v in lastValue.variable
+        var prop = prop_find({ id: v.id }, 'f')
+        if empty(prop)
+          prop = prop_find({ id: v.id }, 'b')
+        endif
+        if !empty(prop)
+          var lastInsert = @. == '' ? lastValue.default : @.
+          var view = winsaveview()
+          exec 'silent keeppatterns :%s/\%' .. prop.lnum .. 'l\%' .. prop.col .. 'c.*\%' .. string(prop.col + prop.length) .. "c/" .. lastInsert .. "/"
+          winrestview(view)
+        endif
+      endfor
+    endif
+  endif
+enddef
+
+def g:JumpSnippet(snippet: dict<any>): string
+  placeholderIndex += 1
+  var value = snippet[placeholderIndex]
+  var prop = prop_find({ id: value.id, skipstart: 1 }, 'f')
   if empty(prop)
-    prop = prop_find({ type: propPlaceholder, id: id, skipstart: 1 }, 'b')
+    prop = prop_find({ id: value.id, skipstart: 1 }, 'b')
   endif
   if !empty(prop)
     cursor(prop.lnum, prop.col)
@@ -112,10 +169,9 @@ def g:JumpSnippet(): string
     endif
     isSnippetJump = 1
     timer_start(100, ResetSnippetJump)
-    if id >= g:snippetPlaceholderCount - 1
+    if placeholderIndex >= g:snippetPlaceholderCount
       SnippetReset()
     endif
-    id += 1
     return "\<esc>" .. str
   endif
   return ''
@@ -126,13 +182,20 @@ def ResetSnippetJump(_: number)
 enddef
 
 def SnippetReset()
-  mapset('i', 0, g:snippet_save_map)
+  if exists('g:snippet_save_map')
+    mapset('i', 0, g:snippet_save_map)
+  endif
+
 enddef
 
 def g:SnippetHandleInsertLeave()
   if isSnippetJump == 0
     prop_remove({ type: propPlaceholder, all: 1 })
     SnippetReset()
+  else
+    if placeholderIndex != 0
+      SnippetReplaceVariable()
+    endif
   endif
 enddef
 
