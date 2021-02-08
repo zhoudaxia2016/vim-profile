@@ -11,9 +11,9 @@ function! CleverTab()
   if getline('.')[col('.')-2] =~ '\s'
     return "\<Tab>"
   else
-    return "\<C-N>"
+    return snippet#ExpandSnippet("\<c-n>")
   endif
 endfunction
-inoremap <Tab> <C-R>=CleverTab()<CR>
+imap <Tab> <C-R>=CleverTab()<CR>
 
 set cpt+=k
