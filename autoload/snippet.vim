@@ -25,6 +25,10 @@ def snippet#LoadSnippet()
   for line in readfile(fn)
     if line =~ '^snippet'
       key = split(line, ' ')[1]
+      if has_key(snippets, key)
+        throw 'Duplicate Snippet Key!'
+        return
+      endif
     elseif line =~ '^\s\+'
       if has_key(snippets, key)
         add(snippets[key], substitute(line, '^' .. snippetFileIndent, '', ''))
@@ -121,11 +125,11 @@ def AddSnippetJumpList(snippet: dict<any>)
       endfor
     endif
   endfor
-  g:snippet_save_map = maparg('<tab>', 'i', 0, 1)
+  g:snippet_save_map = maparg('<c-j>', 'i', 0, 1)
   if placeholderCount != 0
     g:snippetPlaceholderCount = placeholderCount
     g:snippet = snippet
-    inoremap <tab> <c-r>=JumpSnippet(snippet)<cr>
+    inoremap <c-j> <c-r>=JumpSnippet(snippet)<cr>
   endif
 enddef
 

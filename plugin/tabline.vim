@@ -27,6 +27,6 @@ function MyTabLabel(n)
 	let buflist = tabpagebuflist(a:n)
 	let winnr = tabpagewinnr(a:n)
   let bufnr = buflist[winnr - 1]
-  return (getbufvar(bufnr, "&mod") == 1 ? '+ ' : '') . bufname(bufnr)
+  return (getbufvar(bufnr, "&mod") == 1 ? '+ ' : '') . fnamemodify(bufname(bufnr), ':t')
 endfunction
 set tabline=%!MyTabLine()
