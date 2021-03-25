@@ -13,7 +13,6 @@ au FileType gitcommit call <SID>afterOpenCommit()
 au FileType gitstatus call <SID>afterOpenStatus()
 
 func <SID>afterOpenCommit ()
-  startinsert
   retab
   nnoremap w :wq<cr>
 endfunc

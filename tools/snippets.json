@@ -1,0 +1,5 @@
+{
+  "html": {
+    "for": "for (var ${class} = 0; i < ${id}.length; ${class}++) {\n\t|}"
+  }
+}
