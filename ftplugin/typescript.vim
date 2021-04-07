@@ -7,8 +7,8 @@ let s:compile_job = v:null
 let s:bufnr = bufnr()
 let s:compile_msg = []
 
-exec 'vert pedit ' . s:compile_fn
-vert res -30
+"exec 'vert pedit ' . s:compile_fn
+"vert res -30
 
 au BufWritePost <buffer> call s:compile()
 
