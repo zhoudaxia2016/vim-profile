@@ -11,7 +11,11 @@ function! CleverTab()
   if getline('.')[col('.')-2] =~ '\s'
     return "\<Tab>"
   else
-    return snippet#ExpandSnippet("\<c-n>")
+    if has('nvim')
+      return "\<c-n>"
+    else
+      return snippet#ExpandSnippet("\<c-n>")
+    endif
   endif
 endfunction
 imap <Tab> <C-R>=CleverTab()<CR>
