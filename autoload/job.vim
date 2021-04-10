@@ -12,6 +12,25 @@ function <SID>HandleExit(callback, ch, status)
   call remove(g:job_msgs, ch)
 endfunc
 function job#open(cmd, callback)
-  let job = job_start(a:cmd, #{ callback: function('<SID>handleOutput'), exit_cb: function('<SID>HandleExit', [a:callback])})
+  let job = job#start(a:cmd, #{ out_cb: function('<SID>handleOutput'), exit_cb: function('<SID>HandleExit', [a:callback])})
   return job
+endfunc
+
+function job#start(cmd, opts)
+  let opts = a:opts
+  if has('nvim')
+    let nvimOpts = {}
+    if has_key(opts, 'out_cb')
+      let nvimOpts.on_stdout = {ch, data, name -> opts.out_cb(ch, join(data, ''))}
+    endif
+    if has_key(opts, 'err_cb')
+      let nvimOpts.on_stderr = {ch, data, name -> opts.err_cb(ch, join(data, ''))}
+    endif
+    if has_key(opts, 'close_cb')
+      let nvimOpts.on_exit = {ch, code, type -> opts.close_cb(ch)}
+    endif
+    return jobstart(a:cmd, nvimOpts)
+  else
+    return job_start(a:cmd, opts)
+  endif
 endfunc

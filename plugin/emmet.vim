@@ -1,3 +1,6 @@
+if has('nvim')
+  finish
+endif
 function! <SID>emmetCb(expand)
   let start = 0
   let currentLine = line('.')

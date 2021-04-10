@@ -7,10 +7,16 @@ function! <SID>translate ()
   endfunc
   function! s:close (c) closure
     call map(result, 'trim(v:val)')
-    echo result[1:]
-    call popup_atcursor(result[1:], { 'padding': [1, 2, 0, 2], 'borderchars': ['-', '|', '-', '|'], 'border': [1] })
+    if has('nvim')
+      let buf = nvim_create_buf(v:false, v:true)
+      call nvim_buf_set_lines(buf, 0, -1, v:true, result[2:])
+      let id = nvim_open_win(buf, v:false, #{ relative:'cursor',row:1,col:0,width:20,height:5})
+      call timer_start(2000, {-> nvim_win_close(id, v:true)})
+    else 
+      call popup_atcursor(result[1:], { 'padding': [1, 2, 0, 2], 'borderchars': ['-', '|', '-', '|'], 'border': [1] })
+    endif
   endfunc
-  call job_start('dict ' . @0, { 'callback': funcref('s:callback'), 'close_cb': funcref('s:close') })
+  call job#start('dict ' . @0, { 'out_cb': funcref('s:callback'), 'close_cb': funcref('s:close') })
 endfunc
 
 nnoremap <leader>t :call <SID>translate()<cr>
