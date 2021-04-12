@@ -38,7 +38,11 @@ set ttyfast
 " deletes netrw's buffer once it's hidden (using ':q', for example)
 autocmd FileType netrw setl bufhidden=delete
 set undofile
-set undodir=/tmp/
+if (has('nvim')) 
+  set undodir=/tmp/nvim
+else
+  set undodir=/tmp/vim
+endif
 set ignorecase
 set cursorline
 set nowritebackup
@@ -66,3 +70,17 @@ au VimEnter * if &diff | execute 'windo set wrap' | endif
 hi TabLineFill ctermfg=2 ctermbg=0
 hi TabLine ctermfg=2 ctermbg=0
 hi TabLineSel term=bold ctermfg=0 ctermbg=2
+
+if has('nvim')
+  pa nvim-lspconfig
+endif
+if has('nvim')
+lua << EOF
+require'lspconfig'.denols.setup{
+  on_attach = on_attach,
+  init_options = {
+    lint = true,
+  }
+}
+EOF
+endif

@@ -15,6 +15,7 @@ function tmux#window(opts)
     let outputFile = tempname()
     let wholeCmd = wholeCmd . ' -o ' . outputFile
     function opts.exit_cb(...) closure
+      echom outputFile
       if filereadable(outputFile)
         let output = readfile(outputFile)
         if len(output) != 0
@@ -24,7 +25,7 @@ function tmux#window(opts)
         call timer_start(500, opts.exit_cb)
       endif
     endfunc
-    let jobOpts.exit_cb = {ch -> timer_start(500, opts.exit_cb)}
+    let jobOpts.close_cb = {ch -> timer_start(500, opts.exit_cb)}
   endif
   if root
     let wholeCmd = wholeCmd . ' -r '
