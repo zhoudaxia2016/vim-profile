@@ -7,10 +7,10 @@ let s:compile_job = v:null
 let s:bufnr = bufnr()
 let s:compile_msg = []
 
-exec 'vert pedit ' . s:compile_fn
-vert res -30
+"exec 'vert pedit ' . s:compile_fn
+"vert res -30
 
-au BufWritePost <buffer> call s:compile()
+"au BufWritePost <buffer> call s:compile()
 
 function s:compile_cb(ch, msg)
   call add(s:compile_msg, a:msg)
@@ -23,7 +23,7 @@ function s:compile_close(ch)
   let errors = map(errors, {key,val -> #{filename: val[1], lnum: val[2], col: val[3], text: val[4]}})
   call setqflist(errors, 'r')
   let s:compile_msg = []
-  vert pedit!
+  "vert pedit!
   copen
   cw
 endfunc
