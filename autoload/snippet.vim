@@ -40,7 +40,7 @@ def snippet#LoadSnippet()
   b:snippets = snippets
 enddef
 
-def snippet#ExpandSnippet(default: string):string
+def snippet#ExpandSnippet(default: string): string
   var start = col('.') - 1
   var line = getline('.')
   while start > 0 && line[start - 1] !~ '\s'
@@ -49,7 +49,7 @@ def snippet#ExpandSnippet(default: string):string
   var currentIndent = repeat(' ', indent('.'))
   var trigger = line[start : ]
   if exists('b:snippets') && has_key(b:snippets, trigger)
-    var snippet = mapnew(b:snippets[trigger], (_, line) => currentIndent .. line)
+    var snippet = mapnew(b:snippets[trigger], (_, l) => currentIndent .. l)
     var lines: list<string>
     [lines, snippet] = GenerateSnippetInfo(snippet)
     append('.', lines)
@@ -68,42 +68,43 @@ def GenerateSnippetInfo(snippet: list<string>): list<any>
   var lines = []
   var lineIndex = 0
   for line in snippet
+    var newLine = ''
     while 1
-      var _ = matchstrpos(line, snippetPlaceholderPattern)
-      if (_[0] == '')
+      var a = matchstrpos(line, snippetPlaceholderPattern)
+      if (a[0] == '')
         break
       endif
-      var m = matchlist(_[0], pat)
+      var m = matchlist(a[0], pat)
       var i = m[1]
       var default = m[3] == '' ? '_' : m[3]
       info[i] = {
         line: lineIndex,
-        startCol: _[1],
+        startCol: a[1],
         default: default,
         id: SnippetGuid()
       }
-      line = substitute(line, _[0], default, '')
+      newLine = substitute(line, a[0], default, '')
     endwhile
     lineIndex += 1
-    add(lines, line)
+    add(lines, newLine)
   endfor
   lineIndex = 0
   for line in lines
     var start = 0
     while 1
-      var _ = matchstrpos(line, patVar, start)
-      if (_[0] == '')
+      var a = matchstrpos(line, patVar, start)
+      if (a[0] == '')
         break
       endif
-      var m = matchlist(_[0], patVar)
+      var m = matchlist(a[0], patVar)
       var placeholder = get(info, m[1], {})
       if !empty(placeholder)
         if !has_key(placeholder, 'variable')
           placeholder.variable = []
         endif
-        add(placeholder.variable, { line: lineIndex, startCol: _[1], length: len(_[0]), id: SnippetGuid() })
+        add(placeholder.variable, { line: lineIndex, startCol: a[1], length: len(a[0]), id: SnippetGuid() })
       endif
-      start = _[2]
+      start = a[2]
     endwhile
     lineIndex += 1
   endfor

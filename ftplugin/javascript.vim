@@ -11,5 +11,5 @@ compiler eslint
 # path
 set path=./node_modules;./
 
-import { WebdevelopInit } from '../autoload/webdevelop.vim'
-WebdevelopInit()
+#import { WebdevelopInit } from '../autoload/webdevelop.vim'
+#WebdevelopInit()
