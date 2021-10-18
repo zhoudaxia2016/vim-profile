@@ -19,7 +19,7 @@ endfunc
 function typescript#start_env()
   let fn = expand('%:r')
   let fn = fn . '.js'
-  exe 'vs ' . fn
+  ":exe 'vs ' . fn
   setlocal autoread
   wincmd h
   au BufWrite  <buffer> call <SID>tsc_cmd()
