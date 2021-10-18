@@ -10,7 +10,7 @@ let s:compile_msg = []
 "exec 'vert pedit ' . s:compile_fn
 "vert res -30
 
-au BufWritePost <buffer> call s:compile()
+"au BufWritePost <buffer> call s:compile()
 
 function s:compile_cb(ch, msg)
   call add(s:compile_msg, a:msg)
