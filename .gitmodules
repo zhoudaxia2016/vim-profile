@@ -1,18 +1,15 @@
 [submodule "pack/bundle/start/indentLine"]
-	path = pack/bundle/start/indentLine
-	url = git@github.com:Yggdroot/indentLine.git
+  path = pack/bundle/start/indentLine
+  url = git@github.com:Yggdroot/indentLine.git
 [submodule "pack/bundle/start/typescript-vim"]
-	path = pack/bundle/start/typescript-vim
-	url = git@github.com:leafgarland/typescript-vim.git
+  path = pack/bundle/start/typescript-vim
+  url = git@github.com:leafgarland/typescript-vim.git
 [submodule "pack/bundle/start/AnsiEsc"]
-	path = pack/bundle/start/AnsiEsc
-	url = git@github.com:vim-scripts/AnsiEsc.vim.git
+  path = pack/bundle/start/AnsiEsc
+  url = git@github.com:vim-scripts/AnsiEsc.vim.git
 [submodule "pack/bundle/start/nord-vim"]
-	path = pack/bundle/start/nord-vim
-	url = git@github.com:arcticicestudio/nord-vim.git
+  path = pack/bundle/start/nord-vim
+  url = git@github.com:arcticicestudio/nord-vim.git
 [submodule "pack/bundle/opt/nvim-lspconfig"]
-	path = pack/bundle/opt/nvim-lspconfig
-	url = https://github.com/neovim/nvim-lspconfig.git
-[submodule "pack/bundle/start/LuaSnip"]
-	path = pack/bundle/start/LuaSnip
-	url = git@github.com:L3MON4D3/LuaSnip.git
+  path = pack/bundle/opt/nvim-lspconfig
+  url = https://github.com/neovim/nvim-lspconfig.git
