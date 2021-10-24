@@ -7,6 +7,9 @@
 [submodule "pack/bundle/start/nord-vim"]
   path = pack/bundle/start/nord-vim
   url = git@github.com:arcticicestudio/nord-vim.git
+[submodule "pack/bundle/start/nvim-lspconfig"]
+  path = pack/bundle/start/nvim-lspconfig
+  url = https://github.com/neovim/nvim-lspconfig.git
 [submodule "pack/bundle/start/vim-vsnip"]
   path = pack/bundle/start/vim-vsnip
   url = git@github.com:hrsh7th/vim-vsnip.git
