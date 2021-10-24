@@ -16,6 +16,7 @@ endfunc
 
 let b:moreDicts = {
   \ "vue": ['javascript', 'css'],
+  \ "typescript": ['javascript'],
   \ "html": ['javascript', 'css'],
   \ "wxml": ['mp'],
   \ "wxss": ['mp']

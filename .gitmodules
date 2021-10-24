@@ -13,3 +13,6 @@
 [submodule "pack/bundle/opt/nvim-lspconfig"]
 	path = pack/bundle/opt/nvim-lspconfig
 	url = https://github.com/neovim/nvim-lspconfig.git
+[submodule "pack/bundle/start/LuaSnip"]
+	path = pack/bundle/start/LuaSnip
+	url = git@github.com:L3MON4D3/LuaSnip.git

@@ -1,4 +1,4 @@
-" complete
+" 补全
 inoremap <c-k> <c-x><c-k>
 inoremap <c-l> <c-x><c-l>
 inoremap <c-t> <c-x><c-t>
@@ -11,11 +11,7 @@ function! CleverTab()
   if getline('.')[col('.')-2] =~ '\s'
     return "\<Tab>"
   else
-    if has('nvim')
-      return "\<c-n>"
-    else
-      return snippet#ExpandSnippet("\<c-n>")
-    endif
+    return "\<c-n>"
   endif
 endfunction
 imap <Tab> <C-R>=CleverTab()<CR>
