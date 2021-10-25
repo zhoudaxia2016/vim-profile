@@ -15,7 +15,6 @@ function tmux#window(opts)
     let outputFile = tempname()
     let wholeCmd = wholeCmd . ' -o ' . outputFile
     function opts.exit_cb(...) closure
-      echom outputFile
       if filereadable(outputFile)
         let output = readfile(outputFile)
         if len(output) != 0
