@@ -29,9 +29,19 @@
 ---
 
 ## submodule管理插件
+目录 `pack/bundle/start/`
+
+## 基本submodule插件
+`nord-vim` 语法高亮theme
+`nvim-lspconfig` neovim built-in lsp client
+`vim-vsnip` snippet
+`indentLine` 缩进提示
 
 ## 引入插件
-先clone到插件目录，然后git add插件目录，最后提交
+```
+git submodule add url path
+git submodule update -remote
+```
 
 ### 更新插件
 ```

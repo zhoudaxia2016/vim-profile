@@ -13,3 +13,6 @@
 [submodule "pack/bundle/start/vim-vsnip"]
   path = pack/bundle/start/vim-vsnip
   url = git@github.com:hrsh7th/vim-vsnip.git
+[submodule "pack/bundle/start/vim-jsx-pretty"]
+	path = pack/bundle/start/vim-jsx-pretty
+	url = git@github.com:MaxMEllon/vim-jsx-pretty.git
