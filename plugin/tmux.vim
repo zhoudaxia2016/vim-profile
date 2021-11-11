@@ -30,7 +30,7 @@ function <SID>openFile(output)
 endfunc
 
 function <SID>openOldFile()
-  if expand('%') == ''
+  if len(v:argv) == 1
     call tmux#window(#{ cmd: 'fzf', output: 1, input: 'echo join(v:oldfiles, "\n")', callback: function('<SID>openFile'), root: 0 })
   endif
 endfunc

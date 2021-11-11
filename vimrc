@@ -38,8 +38,8 @@ set ttyfast
 " deletes netrw's buffer once it's hidden (using ':q', for example)
 autocmd FileType netrw setl bufhidden=delete
 set undofile
-if (has('nvim')) 
-  set undodir=/tmp/nvim
+if has('nvim')
+  set undodir=/tmp/nvim/
 else
   set undodir=/tmp/vim
 endif
@@ -50,7 +50,7 @@ set fileencodings=utf-8,chinese,latin-1,gbk,gb18030,gk2312
 
 let g:netrw_use_noswf= 0
 source $VIMRUNTIME/menu.vim
-set wildmenu                                                                                                                                                     
+set wildmenu
 set cpo-=<
 set wcm=<C-Z>
 map <F3> :emenu <C-Z>
@@ -71,16 +71,9 @@ hi TabLineFill ctermfg=2 ctermbg=0
 hi TabLine ctermfg=2 ctermbg=0
 hi TabLineSel term=bold ctermfg=0 ctermbg=2
 
-if has('nvim')
-  pa nvim-lspconfig
-endif
-if has('nvim')
-lua << EOF
-require'lspconfig'.denols.setup{
-  on_attach = on_attach,
-  init_options = {
-    lint = true,
-  }
-}
-EOF
-endif
+set termguicolors
+set inccommand=split
+augroup highlight_yank
+  autocmd!
+  au TextYankPost * silent! lua vim.highlight.on_yank { higroup='VimWarn', timeout=700 }
+augroup END
