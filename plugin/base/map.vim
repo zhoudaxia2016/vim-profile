@@ -19,6 +19,7 @@ endfunction
 function <SID>clip ()
   silent %w !clip.exe
 endfunc
+nnoremap ; :
 
 " move around window
 nnoremap <c-l> <c-w><c-l>
