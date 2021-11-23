@@ -4,8 +4,13 @@ let s:quotations = ['"', "'", "`"]
 au FileType * call s:modifyConfig()
 function s:modifyConfig ()
   let ft = expand('<amatch>')
+  if ft == 'netrw' 
+    return
+  end
   if ft == 'vim'
-    let s:quotations = ["'", "`"]
+    let b:quotations = ["'", "`"]
+  else
+    let b:quotations = s:quotations
   endif
   inoremap <cr> <c-r>=<SID>mapEnter()<cr>
   let l = len(s:brackets)
@@ -16,10 +21,10 @@ function s:modifyConfig ()
     let i = i + 1
   endwhile
 
-  let l = len(s:quotations)
+  let l = len(b:quotations)
   let i = 0
   while(i < l)
-    exe "inoremap " . s:quotations[i][0] . " <c-r>=InputQuot(" . i . ")<cr>"
+    exe "inoremap <buffer> " . b:quotations[i][0] . " <c-r>=InputQuot(" . i . ")<cr>"
     let i = i + 1
   endwhile
 endfunc
@@ -39,12 +44,12 @@ function InputQuot (i)
   let column = col('.')
   let currentChar = curline[column - 1]
   let lastChar = curline[column - 2]
-  if currentChar == s:quotations[a:i]
+  if currentChar == b:quotations[a:i]
     return "\<right>"
   elseif currentChar =~ '\S' || lastChar =~ '\S'
-    return s:quotations[a:i]
+    return b:quotations[a:i]
   else
-    return s:quotations[a:i] . s:quotations[a:i] . "\<left>"
+    return b:quotations[a:i] . b:quotations[a:i] . "\<left>"
   endif
 endfunc
 

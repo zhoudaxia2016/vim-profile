@@ -37,6 +37,7 @@ nnoremap <leader>z :!google-chrome %<cr>
 "nnoremap <leader>l :(&filetype != 'netrw') ? (exec exists('syntax_on') ? 'syn off': 'syn on'<CR>) : '<CR>'
 
 nnoremap <leader>s :w !sudo tee %<cr>
+nnoremap ; :
 nnoremap <leader>1 1gt
 nnoremap <leader>2 2gt
 nnoremap <leader>3 3gt
