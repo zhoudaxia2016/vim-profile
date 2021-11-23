@@ -72,8 +72,3 @@ hi TabLine ctermfg=2 ctermbg=0
 hi TabLineSel term=bold ctermfg=0 ctermbg=2
 
 set termguicolors
-set inccommand=split
-augroup highlight_yank
-  autocmd!
-  au TextYankPost * silent! lua vim.highlight.on_yank { higroup='VimWarn', timeout=700 }
-augroup END
