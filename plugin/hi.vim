@@ -1,1 +1,1 @@
-hi jsArguments guifg=#17223b
+hi jsPrototype guifg=#17223b

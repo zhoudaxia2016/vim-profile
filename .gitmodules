@@ -1,12 +1,6 @@
 [submodule "pack/bundle/start/indentLine"]
   path = pack/bundle/start/indentLine
   url = git@github.com:Yggdroot/indentLine.git
-[submodule "pack/bundle/start/typescript-vim"]
-  path = pack/bundle/start/typescript-vim
-  url = git@github.com:leafgarland/typescript-vim.git
-[submodule "pack/bundle/start/nord-vim"]
-  path = pack/bundle/start/nord-vim
-  url = git@github.com:arcticicestudio/nord-vim.git
 [submodule "pack/bundle/start/nvim-lspconfig"]
   path = pack/bundle/start/nvim-lspconfig
   url = https://github.com/neovim/nvim-lspconfig.git
@@ -16,3 +10,12 @@
 [submodule "pack/bundle/start/vim-jsx-pretty"]
 	path = pack/bundle/start/vim-jsx-pretty
 	url = git@github.com:MaxMEllon/vim-jsx-pretty.git
+[submodule "pack/bundle/start/nord.nvim"]
+	path = pack/bundle/start/nord.nvim
+	url = git@github.com:shaunsingh/nord.nvim.git
+[submodule "pack/bundle/start/nvim-treesitter"]
+	path = pack/bundle/start/nvim-treesitter
+	url = git@github.com:nvim-treesitter/nvim-treesitter.git
+[submodule "pack/bundle/start/playground"]
+	path = pack/bundle/start/playground
+	url = git@github.com:nvim-treesitter/playground.git
