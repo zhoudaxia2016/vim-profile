@@ -61,6 +61,7 @@ function <SID>setKeymap()
   nnoremap <buffer> <cr>b :call tmux#window(#{ cmd: 'fzf', output: 1, callback: function('<SID>searchBufferCb'), root: 0, input: 'ls' })<cr>
   nnoremap <buffer> <cr>m :call <SID>more()<cr>
   nnoremap <buffer> <cr>s :set hls!<cr>
+  nnoremap <buffer> <cr>r :call <SID>openOldFile()<cr>
 endfunc
 au BufReadPre * call <SID>setKeymap()
 au VimEnter * call <SID>openOldFile()
