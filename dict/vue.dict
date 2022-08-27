@@ -1,4 +1,0 @@
-template script style
-export default
-data computed methods watch
-beforeCreate created beforeMount mounted
