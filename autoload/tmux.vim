@@ -38,5 +38,7 @@ function tmux#window(opts)
     let cmdInput = split(cmdInput, '\n')
     call writefile(cmdInput, inputFile)
   endif
+  echom root
+  echom wholeCmd
   call job#start(wholeCmd, jobOpts)
 endfunc
